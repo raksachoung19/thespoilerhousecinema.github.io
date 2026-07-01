@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Now — The Spoiler House</title>
+  <link rel="stylesheet" href="Style.css">
+  <link rel="stylesheet" href="booking.css">
+  <link rel="stylesheet" href="ticket.css">
+  <link rel="stylesheet" href="join-now.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="auth-page">
+  <div class="auth-card">
+
+    <!-- Top row: logo + back link -->
+    <div class="auth-toprow">
+      <a href="index.html" class="auth-logo">The Spoiler House</a>
+      <div class="lang-switch" id="langSwitch">
+        <button class="active" data-lang="en">EN</button>
+        <button data-lang="kh">KH</button>
+      </div>
+      <a href="index.html" class="auth-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        Back
+      </a>
+    </div>
+
+    <!-- Tabs -->
+    <div class="auth-tabs">
+      <button class="auth-tab-btn active" data-tab="login">Sign In</button>
+      <button class="auth-tab-btn" data-tab="signup">Create Account</button>
+    </div>
+
+    <!-- ===== LOGIN ===== -->
+    <form class="auth-form active" id="form-login" novalidate>
+      <div>
+        <div class="auth-heading serif">Welcome back</div>
+        <div class="auth-subheading">Sign in to access your tickets and bookings.</div>
+      </div>
+
+      <div class="auth-error" id="loginError"></div>
+      <div class="auth-success" id="loginSuccess"></div>
+
+      <div class="auth-field">
+        <label class="auth-label" for="loginEmail">Email</label>
+        <input class="auth-input" type="email" id="loginEmail" name="loginEmail"
+               placeholder="you@example.com" required autocomplete="email">
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-label" for="loginPass">Password</label>
+        <div class="auth-input-wrap">
+          <input class="auth-input" type="password" id="loginPass" name="loginPass"
+                 placeholder="Your password" required autocomplete="current-password">
+          <button type="button" class="auth-pw-toggle" aria-label="Toggle password visibility" data-target="loginPass">
+            <svg class="eye-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="eye-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary auth-submit">Sign In</button>
+
+      <p class="auth-switch">No account? <a href="#" data-switch="signup">Create one →</a></p>
+    </form>
+
+    <!-- ===== SIGNUP ===== -->
+    <form class="auth-form" id="form-signup" novalidate>
+      <div>
+        <div class="auth-heading serif">Join the club</div>
+        <div class="auth-subheading">Create a free account to book tickets, earn points, and more.</div>
+      </div>
+
+      <!-- Benefits -->
+      <div class="auth-benefits">
+        <div class="auth-benefit"><span class="auth-benefit-icon">🎟</span> Save and manage all your e-tickets</div>
+        <div class="auth-benefit"><span class="auth-benefit-icon">⭐</span> Earn points on every booking</div>
+        <div class="auth-benefit"><span class="auth-benefit-icon">🎂</span> Free birthday ticket every year</div>
+      </div>
+
+      <div class="auth-or">or fill in your details</div>
+
+      <div class="auth-error" id="signupError"></div>
+      <div class="auth-success" id="signupSuccess"></div>
+
+      <div class="auth-field">
+        <label class="auth-label" for="signupName">Full Name</label>
+        <input class="auth-input" type="text" id="signupName" name="signupName"
+               placeholder="Your name" required autocomplete="name">
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-label" for="signupEmail">Email</label>
+        <input class="auth-input" type="email" id="signupEmail" name="signupEmail"
+               placeholder="you@example.com" required autocomplete="email">
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-label" for="signupPass">Password</label>
+        <div class="auth-input-wrap">
+          <input class="auth-input" type="password" id="signupPass" name="signupPass"
+                 placeholder="Min 6 characters" required autocomplete="new-password">
+          <button type="button" class="auth-pw-toggle" aria-label="Toggle password" data-target="signupPass">
+            <svg class="eye-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="eye-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-label" for="signupConf">Confirm Password</label>
+        <div class="auth-input-wrap">
+          <input class="auth-input" type="password" id="signupConf" name="signupConf"
+                 placeholder="Repeat password" required autocomplete="new-password">
+          <button type="button" class="auth-pw-toggle" aria-label="Toggle password" data-target="signupConf">
+            <svg class="eye-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="eye-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary auth-submit">Create Account</button>
+
+      <p class="auth-switch">Already have an account? <a href="#" data-switch="login">Sign in →</a></p>
+    </form>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  const USERS_KEY = 'sh_users';
+  const SESSION_KEY = 'sh_user';
+
+  /* ── redirect if already logged in ── */
+  try {
+    if(localStorage.getItem(SESSION_KEY)){
+      window.location.href = 'Rerng.html';
+    }
+  } catch(e){}
+
+  /* ── tab switching ── */
+  function switchTab(tab){
+    document.querySelectorAll('.auth-tab-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.tab === tab));
+    document.querySelectorAll('.auth-form').forEach(f =>
+      f.classList.toggle('active', f.id === 'form-' + tab));
+    clearAll();
+  }
+
+  document.querySelectorAll('.auth-tab-btn').forEach(b =>
+    b.addEventListener('click', () => switchTab(b.dataset.tab)));
+
+  document.querySelectorAll('[data-switch]').forEach(a =>
+    a.addEventListener('click', e => { e.preventDefault(); switchTab(a.dataset.switch); }));
+
+  /* ── error / success helpers ── */
+  function clearAll(){
+    document.querySelectorAll('.auth-error, .auth-success').forEach(el => {
+      el.style.display = 'none'; el.textContent = '';
+    });
+    document.querySelectorAll('.auth-input').forEach(i => i.classList.remove('error'));
+  }
+
+  function showError(id, msg){
+    const el = document.getElementById(id);
+    el.textContent = msg; el.style.display = 'block';
+  }
+
+  function showSuccess(id, msg){
+    const el = document.getElementById(id);
+    el.textContent = msg; el.style.display = 'block';
+  }
+
+  /* ── password toggles ── */
+  document.querySelectorAll('.auth-pw-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = document.getElementById(btn.dataset.target);
+      const isText = input.type === 'text';
+      input.type = isText ? 'password' : 'text';
+      btn.querySelector('.eye-show').style.display = isText ? '' : 'none';
+      btn.querySelector('.eye-hide').style.display = isText ? 'none' : '';
+    });
+  });
+
+  /* ── LOGIN ── */
+  document.getElementById('form-login').addEventListener('submit', function(e){
+    e.preventDefault();
+    clearAll();
+    const email = this.loginEmail.value.trim();
+    const pass  = this.loginPass.value;
+
+    if(!email){ showError('loginError', 'Please enter your email.'); return; }
+    if(!pass)  { showError('loginError', 'Please enter your password.'); return; }
+
+    const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+    const found = users.find(u => u.email === email && u.password === pass);
+    if(!found){
+      showError('loginError', 'Incorrect email or password.');
+      this.loginEmail.classList.add('error');
+      this.loginPass.classList.add('error');
+      return;
+    }
+    localStorage.setItem(SESSION_KEY, JSON.stringify({ name: found.name, email: found.email }));
+    showSuccess('loginSuccess', '✓ Signed in! Redirecting…');
+    setTimeout(() => { window.location.href = 'Rerng.html'; }, 900);
+  });
+
+  /* ── SIGNUP ── */
+  document.getElementById('form-signup').addEventListener('submit', function(e){
+    e.preventDefault();
+    clearAll();
+    const name  = this.signupName.value.trim();
+    const email = this.signupEmail.value.trim();
+    const pass  = this.signupPass.value;
+    const conf  = this.signupConf.value;
+
+    if(!name) { showError('signupError', 'Please enter your name.'); return; }
+    if(!email){ showError('signupError', 'Please enter your email.'); return; }
+    if(pass.length < 6){ showError('signupError', 'Password must be at least 6 characters.'); return; }
+    if(pass !== conf){
+      showError('signupError', 'Passwords do not match.');
+      this.signupPass.classList.add('error');
+      this.signupConf.classList.add('error');
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+    if(users.find(u => u.email === email)){
+      showError('signupError', 'An account with that email already exists.');
+      this.signupEmail.classList.add('error');
+      return;
+    }
+    users.push({ name, email, password: pass });
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    localStorage.setItem(SESSION_KEY, JSON.stringify({ name, email }));
+    showSuccess('signupSuccess', '✓ Account created! Redirecting…');
+    setTimeout(() => { window.location.href = 'Rerng.html'; }, 900);
+  });
+
+  /* ── URL param: ?tab=signup ── */
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('tab') === 'signup') switchTab('signup');
+
+})();
+</script>
+</body>
+</html>

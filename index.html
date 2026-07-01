@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>thespoilerhouse.com.kh</title>
+    <link rel="stylesheet" href="Style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">  
+</head>
+<body>
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+  <div class="navbar-top">
+    <div class="nav-left">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="searchInput" placeholder="Search movies, cinemas..." data-i18n-placeholder="search" autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+
+    <a href="#" class="logo">
+      <span class="logo-mark">
+        <input type="image" src="logo.png" width="70px" height="60px" flex-shrik="0">
+      </span>
+      <span class="brand-name"> The Spoiler House</span>
+    </a>
+
+    <div class="nav-right">
+      <a href="ticket.html" class="btn btn-ghost" data-i18n="myTickets">🎟 My Tickets</a>
+      <a href="join-now.html" class="btn btn-primary" id="authBtn" data-i18n="joinNow">Join Now</a>
+      <!-- Avatar (shown when logged in) -->
+      <div class="auth-avatar" id="authAvatar" style="display:none">
+        <button class="auth-avatar-btn" id="authAvatarBtn" aria-label="Account menu">
+          <span id="authAvatarInitial"></span>
+        </button>
+        <div class="auth-dropdown" id="authDropdown">
+          <div class="auth-dropdown-name" id="authDropdownName"></div>
+          <div class="auth-dropdown-email" id="authDropdownEmail"></div>
+          <div class="auth-dropdown-divider"></div>
+          <a href="ticket.html" class="auth-dropdown-item">🎟 My Tickets</a>
+          <button class="auth-dropdown-item auth-dropdown-signout" id="authSignOut">Sign Out</button>
+        </div>
+      </div>
+      <div class="notif-wrap" id="notifWrap">
+        <button class="icon-btn" id="notifBtn" aria-label="Notifications" aria-haspopup="true" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          <span class="notif-dot" id="notifDot" hidden></span>
+        </button>
+        <div class="notif-dropdown" id="notifDropdown" role="menu" aria-label="Notifications">
+          <div class="notif-dropdown-head">
+            <span>Notifications</span>
+            <button class="notif-mark-btn" id="notifMarkBtn">Mark all read</button>
+          </div>
+          <div class="notif-list" id="notifList" aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="lang-switch" id="langSwitch">
+        <button class="active" data-lang="en">EN</button>
+        <button data-lang="kh">KH</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="navbar-bottom">
+    <nav class="nav-menu">
+      <a href="#" class="active" data-i18n="nav_home">🏠 Home</a>
+      <a href="#cinemas" data-i18n="nav_cinemas">📍 Cinemas</a>
+      <a href="promotion.html" data-i18n="navOffers">🎟 Offers</a>
+      <a href="food_drink.html" data-i18n="navFnb">🍿 F&amp;B</a>
+    </nav>
+    <a href="cinema.html" class="cinema-dropdown">
+      📍 All Cinemas
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- ===== HERO CAROUSEL ===== -->
+<section class="hero" id="hero">
+  <div class="hero-slides" id="heroSlides">
+
+    <div class="hero-slide active">
+      <div class="hero-slide-bg" style="background-image:url('https://i.pinimg.com/1200x/43/32/02/43320263fe1b22541c058e193203cf61.jpg');"></div>
+      <div class="hero-content">
+        <div class="hero-text fade-up">
+          <span class="hero-badge" data-i18n="hero1Badge">🍿 Combo Rush Delivery</span>
+          <h1 class="hero-title serif" data-i18n="hero1Title">Popcorn &amp; Coke,<br>Delivered to Your Seat</h1>
+          <p class="hero-sub" data-i18n="hero1Sub">Order ahead and skip the concession line. Fresh popcorn and an ice-cold Coke waiting in your row.</p>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide">
+      <div class="hero-slide-bg" style="background-image:url('https://i.pinimg.com/1200x/4c/47/ba/4c47ba8f833aa512cf4cc0bd0d27d9f6.jpg');"></div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <span class="hero-badge" data-i18n="hero2Badge">🎬 Now Showing</span>
+          <h1 class="hero-title serif" data-i18n="hero2Title"> Minions &amp; Monsters<br>In IMAX</h1>
+          <p class="hero-sub" data-i18n="hero2Sub">a duo of clumsy Minion outcasts who attempt to produce their own monster movie, inadvertently summoning a horde of real cinematic monsters that threaten to destroy the world.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide">
+      <div class="hero-slide-bg" style="background-image:url('https://i.pinimg.com/736x/78/eb/47/78eb477094bac2bc1bcfae758d400631.jpg');"></div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <span class="hero-badge" data-i18n="hero3Badge">⭐ The Spoiler House Membership</span>
+          <h1 class="hero-title serif" data-i18n="hero3Title">Join Spoiler House Club,Earn on Every Ticket</h1>
+          <p class="hero-sub" data-i18n="hero3Sub">Free birthday tickets, double points on Tuesdays, and early access to advance bookings.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="hero-arrow prev" aria-label="Previous slide">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <button class="hero-arrow next" aria-label="Next slide">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+  <div class="hero-dots" id="heroDots"></div>
+</section>
+
+<div class="container"><div class="divider" id="divider1"></div></div>
+
+<!-- ===== MOVIES SECTION ===== -->
+<section class="section" id="movies">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="section-eyebrow" data-i18n="moviesEyebrow">This Week</span>
+        <h2 class="section-title serif" data-i18n="moviesTitle">Movies</h2>
+      </div>
+      <div class="tabs">
+        <button class="tab active" data-tab="showing" data-i18n="tabShowing">Now Showing</button>
+        <button class="tab" data-tab="soon" data-i18n="tabSoon">Coming Soon</button>
+      </div>
+    </div>
+
+    <div class="date-scroll" id="dateScroll"></div>
+
+    <div class="az-bar" id="azBar"></div>
+
+    <div class="movie-grid" id="movieGrid"></div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+
+<!-- ===== CINEMA LOCATIONS ===== -->
+<section class="section" id="cinemas">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="section-eyebrow" data-i18n="cinemasEyebrow">Find Us</span>
+        <h2 class="section-title serif" data-i18n="cinemasTitle">Our Cinemas</h2>
+      </div>
+    </div>
+
+    <div class="cinema-loc-grid">
+      <a href="cinema.html?name=Spoiler%20House%20%E2%80%94%20AEON%20Mall%20Sen%20Sok" class="cinema-loc-card">
+        <div class="cinema-loc-icon">📍</div>
+        <div class="cinema-loc-info">
+          <div class="cinema-loc-name">Spoiler House — AEON Mall Sen Sok</div>
+          <div class="cinema-loc-city" data-i18n="cinemaCity">Phnom Penh</div>
+        </div>
+        <svg class="cinema-loc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
+      <a href="cinema.html?name=Spoiler%20House%20%E2%80%94%20Olympia%20Mall" class="cinema-loc-card">
+        <div class="cinema-loc-icon">📍</div>
+        <div class="cinema-loc-info">
+          <div class="cinema-loc-name">Spoiler House — Olympia Mall</div>
+          <div class="cinema-loc-city" data-i18n="cinemaCity">Phnom Penh</div>
+        </div>
+        <svg class="cinema-loc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
+      <a href="cinema.html?name=Spoiler%20House%20%E2%80%94%20Chip%20Mong%20Tower" class="cinema-loc-card">
+        <div class="cinema-loc-icon">📍</div>
+        <div class="cinema-loc-info">
+          <div class="cinema-loc-name">Spoiler House — Chip Mong Tower</div>
+          <div class="cinema-loc-city" data-i18n="cinemaCity">Phnom Penh</div>
+        </div>
+        <svg class="cinema-loc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<span id="fnb"></span>
+<footer aria-labelledby="footer-heading">
+  <h2 id="footer-heading" class="visually-hidden">Site footer</h2>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-logo">
+          <span class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M4 4h16v16H4V4z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 9l6 3-6 3V9z" fill="white"/></svg>
+          </span>
+          The Spoiler House Cinema
+        </div>
+        <p class="footer-desc">Cambodia's premium cinema experience — book tickets, order food, and earn rewards on every visit.</p>
+        <nav class="social-row" aria-label="The Spoiler House on social media">
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.5.3v2.7h-1.4c-1.4 0-1.7.6-1.7 1.6V12h2.9l-.5 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M22 8.3a2.8 2.8 0 0 0-2-2C18.2 6 12 6 12 6s-6.2 0-8 .3a2.8 2.8 0 0 0-2 2A29 29 0 0 0 1.6 12 29 29 0 0 0 2 15.7a2.8 2.8 0 0 0 2 2c1.8.3 8 .3 8 .3s6.2 0 8-.3a2.8 2.8 0 0 0 2-2 29 29 0 0 0 .4-3.7 29 29 0 0 0-.4-3.7zM10 15V9l5.2 3-5.2 3z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M16.6 5.8a4.7 4.7 0 0 1-3.4-1.4v9.6a4.6 4.6 0 1 1-3.9-4.6v2.2a2.4 2.4 0 1 0 1.7 2.4V2h2.2a4.7 4.7 0 0 0 3.4 4v-.2z"/></svg></a>
+          <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M21.5 3.5L2.7 11c-.9.4-.9 1.6.1 1.9l4.6 1.4 1.8 5.6c.3.9 1.4 1.1 2 .4l2.5-2.7 4.7 3.5c.8.6 1.9.1 2.1-.8l3-15.1c.2-1-.8-1.7-1.7-1.3z"/></svg></a>
+        </nav>
+      </div>
+
+      <nav class="footer-col" aria-labelledby="footer-company-heading">
+        <h3 id="footer-company-heading" class="footer-h4-reset" data-i18n="footerCompany">Company</h3>
+        <a href="about.html" data-i18n="footerAbout">About Us</a>
+        <a href="contact.html" data-i18n="footerContact">Contact Us</a>
+        <a href="cinema.html" data-i18n="footerCinemas">Cinemas</a>
+      </nav>
+
+      <nav class="footer-col" aria-labelledby="footer-support-heading">
+        <h3 id="footer-support-heading" class="footer-h4-reset" data-i18n="footerSupport">Support</h3>
+        <a href="promotion.html" data-i18n="footerPromotions">Promotions</a>
+        <a href="#" data-i18n="footerNews">News &amp; Activities</a>
+        <a href="ticket.html" data-i18n="footerMyTicket">My Ticket</a>
+        <a href="termsconditions.html" data-i18n="footerTerms">Terms &amp; Conditions</a>
+        <a href="privacypolicy.html" data-i18n="footerPrivacy">Privacy Policy</a>
+      </nav>
+
+      <section class="footer-col" aria-labelledby="footer-app-heading">
+        <h3 id="footer-app-heading" class="footer-h4-reset">Download App</h3>
+        <div class="store-btns">
+          <a href="playstore.html" class="store-btn" aria-label="Get it on Google Play">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M3 3.5v17a1 1 0 0 0 1.5.9l13-8.5a1 1 0 0 0 0-1.7l-13-8.5A1 1 0 0 0 3 3.5z"/></svg>
+            <span class="lines"><small>GET IT ON</small><strong>Google Play</strong></span>
+          </a>
+          <a href="appstore.html" class="store-btn" aria-label="Download on the App Store">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M16.5 2c.1 1-.3 2-1 2.8-.7.8-1.8 1.5-2.9 1.4-.1-1 .4-2 1-2.8.7-.8 1.9-1.4 2.9-1.4zM20 17c-.5 1.1-.8 1.6-1.4 2.6-.9 1.4-2.2 3.1-3.8 3.1-1.4 0-1.8-.9-3.6-.9-1.8 0-2.3.9-3.7.9-1.6 0-2.8-1.6-3.7-3-2.6-3.9-2.9-8.5-1.3-10.9 1.1-1.7 2.9-2.7 4.6-2.7 1.6 0 2.6.9 3.9.9 1.3 0 2.1-.9 3.9-.9 1.5 0 3.1.8 4.2 2.2-3.7 2-3.1 7.2 1 8.7-.1.3-.2.6-.1.9z"/></svg>
+            <span class="lines"><small>DOWNLOAD ON THE</small><strong>App Store</strong></span>
+          </a>
+        </div>
+        <h3 class="footer-h4-reset" style="margin-top:6px;" id="footer-payment-heading">Payment Methods</h3>
+        <ul class="pay-row" aria-labelledby="footer-payment-heading">
+          <li class="pay-chip">ABA PayWay</li>
+          <li class="pay-chip">VISA</li>
+          <li class="pay-chip">Mastercard</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 The Spoiler House Cinema. All rights reserved.</span>
+      <span>Made for the big screen, in Phnom Penh <span aria-hidden="true">🇰🇭</span><span class="visually-hidden"> (Cambodia)</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ================= HERO CAROUSEL ================= */
+(function(){
+  const slides = document.querySelectorAll('.hero-slide');
+  const dotsWrap = document.getElementById('heroDots');
+  let idx = 0, timer;
+
+  slides.forEach((_, i) => {
+    const b = document.createElement('button');
+    if(i===0) b.classList.add('active');
+    b.setAttribute('aria-label', 'Go to slide ' + (i+1));
+    b.addEventListener('click', () => go(i));
+    dotsWrap.appendChild(b);
+  });
+  const dots = dotsWrap.querySelectorAll('button');
+
+  function go(i){
+    slides[idx].classList.remove('active');
+    dots[idx].classList.remove('active');
+    idx = (i + slides.length) % slides.length;
+    slides[idx].classList.add('active');
+    dots[idx].classList.add('active');
+    restart();
+  }
+  function restart(){
+    clearInterval(timer);
+    timer = setInterval(() => go(idx+1), 5500);
+  }
+  document.querySelector('.hero-arrow.prev').addEventListener('click', () => go(idx-1));
+  document.querySelector('.hero-arrow.next').addEventListener('click', () => go(idx+1));
+  restart();
+})();
+
+/* ================= SPROCKET DIVIDERS ================= */
+document.querySelectorAll('.divider').forEach(div => {
+  for(let i=0;i<60;i++){ const s=document.createElement('span'); div.appendChild(s); }
+});
+
+/* ================= DATE SELECTOR ================= */
+(function(){
+  const wrap = document.getElementById('dateScroll');
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const base = new Date(); base.setHours(0,0,0,0); // always start from today
+  for(let i=0;i<7;i++){
+    const d = new Date(base); d.setDate(base.getDate()+i);
+    const pill = document.createElement('button');
+    pill.className = 'date-pill' + (i===0 ? ' active':'');
+    pill.innerHTML = `<span class="dow">${i===0?'Today':days[d.getDay()]}</span><span class="dnum">${d.getDate()}</span><span class="dow">${d.toLocaleString('en',{month:'short'})}</span>`;
+    pill.addEventListener('click', () => {
+      wrap.querySelectorAll('.date-pill').forEach(p=>p.classList.remove('active'));
+      pill.classList.add('active');
+    });
+    wrap.appendChild(pill);
+  }
+})();
+
+/* ================= TABS ================= */
+let currentTab = 'showing';
+let activeLetter = null;
+const tabs = document.querySelectorAll('.tab');
+tabs.forEach(t => t.addEventListener('click', () => {
+  tabs.forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  currentTab = t.dataset.tab;
+  activeLetter = null;
+  renderMovies(currentTab);
+  renderAzBar();
+}));
+
+/* ================= MOVIE DATA + GRID ================= */
+const MOVIES = {
+  showing: [
+    {title:'Suzzanna: witchcraft', genre:'Action, Thriller', dur:'2h 15m', age:'R18', lang:'EN (Sub KH)', rating:8.6, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000218'},
+    {title:'Supergirl', genre:'Action, Adventure, Superhero', dur:'1h 48m', age:'NC15', lang:'EN (Sub KH)', rating:7.9, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000137'},
+    {title:'Combined Funerals', genre:'Horror', dur:'1h 19m', age:'G', lang:'EN (Sub KH)', rating:7.2, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000250'},
+    {title:'Shake rattle & Roll: Evil Origins', genre:'Horror', dur:'2h 25m', age:'NC15', lang:'EN (Sub KH)', rating:8.9, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000243'},
+    {title:'Where It Began', genre:'Horror', dur:'1h 55m', age:'NC15', lang:'KH Dub', rating:8.1, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000247'},
+    {title:'Death House', genre:'Crime, Thriller', dur:'1h 29m', age:'R18', lang:'Indo (Sub EN/KH)', rating:7.5, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000093'},
+    {title:'Toy Story: Reunion', genre:'Animation, Family', dur:'1h 42m', age:'All', lang:'EN (Sub KH)', rating:9.0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000136'},
+    {title:'Colony', genre:'Thriller, Action', dur:'2h 3m', age:'R18', lang:'KH', rating:8.3, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000185'},
+    {title:'Death Girlfriend', genre:'horror', dur:'1h 28m', age:'NC15', lang:'KH (Sub EN)', rating:9.0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000203'},
+    {title:'Disclosure Day', genre:'Science, Fiction, Thriller', dur:'2h 25m', age:'NC15', lang:'EN (Sub KH)', rating:8.3, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000184'},
+    {title:'Spider-man: Brand New Day', genre:'Superhero, Adventure,Action', dur:'2h 20min', age:'All', lang:'EN (Sub KH)', rating:'9.0', poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000207'}
+  ],
+  soon: [
+    {title:'Obssession', genre:'Horror, Thriller, Romance', dur:'1h 49m', age:'r18', lang:'EN', rating:0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000276', upcoming:'Jul 10'},
+    {title:'Minions & Monsters', genre:'Animation, Adventure, Science Fiction', dur:'1h 30m', age:'13+', lang:'EN', rating:0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000186', upcoming:'Jul 17'},
+    {title:'Moana(Live Action)', genre:'Adventure', dur:'1h 55m', age:'All', lang:'EN (Sub KH)', rating:0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000138', upcoming:'Jul 24'},
+    {title:'The Black House', genre:'Horror', dur:'1h 45m', age:'NC15', lang:'EN/KH', rating:0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000191', upcoming:'Aug 1'},
+  ]
+};
+
+function starSvg(){return `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.6 7.2.9-5.3 5 1.5 7.1L12 18l-6.5 3.6L7 14.5l-5.3-5 7.2-.9z"/></svg>`;}
+
+function renderMovies(tab){
+  const grid = document.getElementById('movieGrid');
+  grid.innerHTML = '';
+
+  let list = MOVIES[tab];
+  if(activeLetter){
+    list = list.filter(m => {
+      const first = m.title.trim()[0].toUpperCase();
+      const bucket = /[A-Z]/.test(first) ? first : '#';
+      return bucket === activeLetter;
+    });
+  }
+
+  if(list.length === 0){
+    grid.innerHTML = `
+      <div class="movie-grid-empty">
+        <span class="icon">🎬</span>
+        <div class="title">No titles found</div>
+        <div>No movies starting with "${activeLetter}" in ${tab === 'showing' ? 'Now Showing' : 'Coming Soon'}.</div>
+      </div>`;
+    return;
+  }
+
+  list.forEach((m,i) => {
+    const card = document.createElement('div');
+    card.className = 'movie-card fade-up';
+    card.style.animationDelay = (i*0.05)+'s';
+    card.innerHTML = `
+      <div class="movie-poster-wrap">
+        <img src="${m.poster}" alt="${m.title} poster" loading="lazy">
+        <span class="age-badge">${m.age}</span>
+        ${m.rating ? `<span class="rating-badge">${starSvg()}${m.rating}</span>` : `<span class="rating-badge" style="color:#A1A1AA">${m.upcoming}</span>`}
+        <div class="overlay">
+          <button class="quick-btn details">${(window.getT&&window.getT().viewDetails)||'View Details'}</button>
+          <button class="quick-btn book">${(window.getT&&window.getT().bookNow)||'Book Now'}</button>
+        </div>
+      </div>
+      <div class="movie-info">
+        <div class="movie-title">${m.title}</div>
+        <div class="movie-meta">
+          <span>${m.genre}</span>
+          <span>${m.dur}</span>
+          <span>${m.lang}</span>
+        </div>
+      </div>
+    `;
+    card.querySelector('.details').addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.location.href = 'movie.html?title=' + encodeURIComponent(m.title);
+    });
+    card.querySelector('.book').addEventListener('click', (e) => {
+      e.stopPropagation();
+      localStorage.setItem('bk_movie', JSON.stringify(m));
+      window.location.href = 'booking.html';
+    });
+    grid.appendChild(card);
+  });
+}
+renderMovies('showing');
+
+/* ================= A-Z INDEX BAR ================= */
+function getAvailableLetters(tab){
+  const set = new Set();
+  MOVIES[tab].forEach(m => {
+    const first = m.title.trim()[0].toUpperCase();
+    set.add(/[A-Z]/.test(first) ? first : '#');
+  });
+  return set;
+}
+
+function renderAzBar(){
+  const bar = document.getElementById('azBar');
+  bar.innerHTML = '';
+  const available = getAvailableLetters(currentTab);
+  const letters = ['#', ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('')];
+
+  letters.forEach(letter => {
+    const has = available.has(letter);
+    const btn = document.createElement('button');
+    btn.className = 'az-letter' + (!has ? ' disabled' : '') + (activeLetter===letter ? ' active' : '');
+    btn.textContent = letter;
+    btn.disabled = !has;
+    btn.setAttribute('aria-label', 'Filter by ' + letter);
+    btn.addEventListener('click', () => {
+      activeLetter = (activeLetter === letter) ? null : letter;
+      renderMovies(currentTab);
+      renderAzBar();
+    });
+    bar.appendChild(btn);
+  });
+
+  const clearBtn = document.createElement('button');
+  clearBtn.className = 'az-clear' + (activeLetter ? ' show' : '');
+  clearBtn.textContent = 'Clear';
+  clearBtn.addEventListener('click', () => {
+    activeLetter = null;
+    renderMovies(currentTab);
+    renderAzBar();
+  });
+  bar.appendChild(clearBtn);
+}
+renderAzBar();
+
+/* ================= LIVE SEARCH (movies + cinemas) ================= */
+(function(){
+  const input = document.getElementById('searchInput');
+  const panel = document.getElementById('searchResults');
+  const wrap = input.closest('.search-wrap');
+
+  const CINEMAS = [
+    {name:'Spoiler House — AEON Mall Sen Sok', city:'Phnom Penh'},
+    {name:'Spoiler House — Olympia Mall', city:'Phnom Penh'},
+    {name:'Spoiler House — Chip Mong Tower', city:'Phnom Penh'}
+  ];
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function highlight(text, q){
+    const i = text.toLowerCase().indexOf(q.toLowerCase());
+    if(i === -1) return escapeHtml(text);
+    return escapeHtml(text.slice(0,i)) + '<mark>' + escapeHtml(text.slice(i,i+q.length)) + '</mark>' + escapeHtml(text.slice(i+q.length));
+  }
+  function cinemaIconSvg(){
+    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4V4z"/><path d="M9 9l6 3-6 3V9z" fill="currentColor" stroke="none"/></svg>`;
+  }
+
+  function getAllMovies(){
+    return [...MOVIES.showing, ...MOVIES.soon];
+  }
+
+  function search(query){
+    const q = query.trim().toLowerCase();
+    if(!q) return {movies:[], cinemas:[]};
+
+    const movies = getAllMovies()
+      .filter(m => m.title.toLowerCase().includes(q))
+      .sort((a,b) => a.title.localeCompare(b.title))
+      .slice(0, 6);
+
+    const cinemas = CINEMAS
+      .filter(c => c.name.toLowerCase().includes(q) || c.city.toLowerCase().includes(q))
+      .sort((a,b) => a.name.localeCompare(b.name));
+
+    return {movies, cinemas};
+  }
+
+  function render(query){
+    const {movies, cinemas} = search(query);
+
+    if(movies.length === 0 && cinemas.length === 0){
+      panel.innerHTML = `
+        <div class="search-empty">
+          <span class="search-no-results-icon">🔍</span>
+          No results for "${escapeHtml(query)}"
+        </div>`;
+      open();
+      return;
+    }
+
+    let html = '';
+    if(movies.length){
+      html += `<div class="search-results-section">
+        <div class="search-results-label">Movies</div>
+        ${movies.map(m => `
+          <div class="search-result-item" data-type="movie" data-title="${escapeHtml(m.title)}">
+            <img class="search-result-poster" src="${m.poster}" alt="">
+            <div class="search-result-info">
+              <div class="search-result-title">${highlight(m.title, query)}</div>
+              <div class="search-result-meta">${m.genre.split(',')[0]} · ${m.dur}</div>
+            </div>
+          </div>`).join('')}
+      </div>`;
+    }
+    if(cinemas.length){
+      html += `<div class="search-results-section">
+        <div class="search-results-label">Cinemas</div>
+        ${cinemas.map(c => `
+          <div class="search-result-item" data-type="cinema" data-name="${escapeHtml(c.name)}">
+            <span class="search-result-cinema-icon">${cinemaIconSvg()}</span>
+            <div class="search-result-info">
+              <div class="search-result-title">${highlight(c.name, query)}</div>
+              <div class="search-result-meta">${c.city}</div>
+            </div>
+          </div>`).join('')}
+      </div>`;
+    }
+    panel.innerHTML = html;
+    open();
+
+    panel.querySelectorAll('[data-type="movie"]').forEach(el => {
+      el.addEventListener('click', () => {
+        const m = getAllMovies().find(x => x.title === el.dataset.title);
+        if(m){
+          localStorage.setItem('bk_movie', JSON.stringify(m));
+          window.location.href = 'booking.html';
+        }
+      });
+    });
+    panel.querySelectorAll('[data-type="cinema"]').forEach(el => {
+      el.addEventListener('click', () => {
+        window.location.href = 'cinema.html?name=' + encodeURIComponent(el.dataset.name);
+      });
+    });
+  }
+
+  function open(){ panel.classList.add('open'); }
+  function close(){ panel.classList.remove('open'); }
+
+  input.addEventListener('input', () => {
+    const q = input.value;
+    if(!q.trim()){ close(); return; }
+    render(q);
+  });
+  input.addEventListener('focus', () => { if(input.value.trim()) render(input.value); });
+  document.addEventListener('click', (e) => { if(!wrap.contains(e.target)) close(); });
+  input.addEventListener('keydown', (e) => { if(e.key === 'Escape'){ input.blur(); close(); } });
+})();
+
+/* ================= AUTH NAV ================= */
+(function(){
+  const SESSION_KEY = 'sh_user';
+  function getUser(){ try{ return JSON.parse(localStorage.getItem(SESSION_KEY)); }catch(e){ return null; } }
+
+  function updateNav(){
+    const user = getUser();
+    const btn    = document.getElementById('authBtn');
+    const avatar = document.getElementById('authAvatar');
+    if(!btn || !avatar) return;
+    if(user){
+      btn.style.display = 'none';
+      avatar.style.display = 'flex';
+      document.getElementById('authAvatarInitial').textContent = user.name.charAt(0).toUpperCase();
+      document.getElementById('authDropdownName').textContent  = user.name;
+      document.getElementById('authDropdownEmail').textContent = user.email;
+    } else {
+      btn.style.display = '';
+      avatar.style.display = 'none';
+    }
+  }
+
+  document.getElementById('authSignOut').addEventListener('click', function(){
+    localStorage.removeItem(SESSION_KEY);
+    updateNav();
+    document.getElementById('authDropdown').classList.remove('open');
+  });
+
+  document.getElementById('authAvatarBtn').addEventListener('click', function(e){
+    e.stopPropagation();
+    document.getElementById('authDropdown').classList.toggle('open');
+  });
+  document.addEventListener('click', function(e){
+    const av = document.getElementById('authAvatar');
+    if(av && !av.contains(e.target))
+      document.getElementById('authDropdown').classList.remove('open');
+  });
+
+  updateNav();
+})();
+
+/* ================= NOTIFICATIONS ================= */
+(function(){
+  const READ_KEY = 'sh_notif_read_ids';
+
+  function getReadIds(){
+    try{ return new Set(JSON.parse(localStorage.getItem(READ_KEY) || '[]')); }
+    catch(e){ return new Set(); }
+  }
+  function saveReadIds(set){
+    try{ localStorage.setItem(READ_KEY, JSON.stringify([...set])); }catch(e){}
+  }
+
+  function timeAgo(ts){
+    if(!ts) return '';
+    const mins = Math.floor((Date.now() - ts) / 60000);
+    if(mins < 1) return 'Just now';
+    if(mins < 60) return mins + 'm ago';
+    const hrs = Math.floor(mins / 60);
+    if(hrs < 24) return hrs + 'h ago';
+    return Math.floor(hrs / 24) + 'd ago';
+  }
+
+  function buildNotifications(){
+    const notifs = [
+      {id:'promo-club',    icon:'⭐', text:'Join The Spoiler House Club and earn points on every ticket.', ts:0},
+      {id:'promo-popcorn', icon:'🍿', text:'Buy 2 Get 1 Free on regular popcorn — this week only.', ts:0}
+    ];
+
+    try{
+      const tickets = JSON.parse(localStorage.getItem('sh_tickets') || '[]');
+      tickets.forEach(t => notifs.push({
+        id:'ticket-' + t.code,
+        icon:'🎟',
+        text:`Booking confirmed: ${t.title} — ${t.date} · ${t.showtime}`,
+        ts: new Date(t.bookedAt).getTime() || 0
+      }));
+    }catch(e){}
+
+    try{
+      const orders = JSON.parse(localStorage.getItem('sh_fnb_orders') || '[]');
+      orders.forEach(o => notifs.push({
+        id:'order-' + o.code,
+        icon:'🧾',
+        text:`Order placed: ${o.items.map(i => i.qty + '× ' + i.name).join(', ')}`,
+        ts: new Date(o.orderedAt).getTime() || 0
+      }));
+    }catch(e){}
+
+    return notifs.sort((a,b) => b.ts - a.ts).slice(0, 12);
+  }
+
+  const wrap     = document.getElementById('notifWrap');
+  const btn      = document.getElementById('notifBtn');
+  const dropdown = document.getElementById('notifDropdown');
+  const list     = document.getElementById('notifList');
+  const dot      = document.getElementById('notifDot');
+  const markBtn  = document.getElementById('notifMarkBtn');
+  if(!wrap || !btn || !dropdown) return;
+
+  function render(){
+    const notifs  = buildNotifications();
+    const readIds = getReadIds();
+
+    dot.hidden = !notifs.some(n => !readIds.has(n.id));
+
+    list.innerHTML = notifs.length ? notifs.map(n => `
+      <div class="notif-item${readIds.has(n.id) ? '' : ' unread'}">
+        <span class="notif-icon">${n.icon}</span>
+        <div class="notif-body">
+          <div class="notif-text">${n.text}</div>
+          ${n.ts ? `<div class="notif-time">${timeAgo(n.ts)}</div>` : ''}
+        </div>
+      </div>`).join('') : `<div class="notif-empty">You're all caught up 🎬</div>`;
+  }
+
+  function open(){
+    render();
+    dropdown.classList.add('open');
+    btn.setAttribute('aria-expanded','true');
+  }
+  function close(){
+    dropdown.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+  }
+
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    dropdown.classList.contains('open') ? close() : open();
+  });
+  markBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    const ids = getReadIds();
+    buildNotifications().forEach(n => ids.add(n.id));
+    saveReadIds(ids);
+    render();
+  });
+  document.addEventListener('click', function(e){
+    if(!wrap.contains(e.target)) close();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') close();
+  });
+
+  render();
+})();
+(function(){
+  const LANG_KEY = 'sh_lang';
+
+  const T = {
+    en: {
+      /* ---- common: nav / buttons / footer ---- */
+      nav_home: 'Home', nav_cinemas: 'Cinemas', nav_about: 'About', nav_contact: 'Contact',
+      search: 'Search movies, cinemas...', myTickets: '🎟 My Tickets', joinNow: 'Join Now',
+      navOffers: '🎟 Offers', navFnb: '🍿 F&amp;B',
+      hero1Badge: '🍿 Combo Rush Delivery', hero1Title: 'Popcorn &amp; Coke,<br>Delivered to Your Seat', hero1Sub: 'Order ahead and skip the concession line. Fresh popcorn and an ice-cold Coke waiting in your row.',
+      hero2Badge: '🎬 Now Showing', hero2Title: 'Minions &amp; Monsters<br>In IMAX', hero2Sub: 'a duo of clumsy Minion outcasts who attempt to produce their own monster movie, inadvertently summoning a horde of real cinematic monsters that threaten to destroy the world.',
+      hero3Badge: '⭐ The Spoiler House Membership', hero3Title: 'Join Spoiler House Club, Earn on Every Ticket', hero3Sub: 'Free birthday tickets, double points on Tuesdays, and early access to advance bookings.',
+      moviesEyebrow: 'This Week', moviesTitle: 'Movies', tabShowing: 'Now Showing', tabSoon: 'Coming Soon',
+      cinemasEyebrow: 'Find Us', cinemasTitle: 'Our Cinemas', cinemaCity: 'Phnom Penh',
+      footerCompany: 'Company', footerAbout: 'About Us', footerContact: 'Contact Us', footerCinemas: 'Cinemas',
+      footerSupport: 'Support', footerPromotions: 'Promotions', footerNews: 'News &amp; Activities', footerMyTicket: 'My Ticket',
+      footerTerms: 'Terms &amp; Conditions', footerPrivacy: 'Privacy Policy',
+      btn_book_tickets: 'Book Tickets', btn_find_cinema: 'Find a Cinema', btn_contact_us: 'Contact Us',
+      btn_back_home: 'Back to Home', btn_browse_movies: 'Browse Movies', btn_all_movies: 'All Movies',
+      btn_all_cinemas: 'All Cinemas', btn_view_all_cinemas: 'View All Cinemas', btn_all_promotions: 'All Promotions',
+      btn_get_directions: 'Get Directions', btn_order_now: 'Order Now', btn_learn_more: 'Learn More',
+      btn_view_deal: 'View Deal', btn_book_now: 'Book Now', btn_view_details: 'View Details',
+      btn_order_food: 'Order Food & Drinks', btn_my_orders: '🧾 My Orders', btn_download_again: 'Download Again',
+      footer_copyright: '© 2026 The Spoiler House Cinema. All rights reserved.',
+
+      /* ---- about.html ---- */
+      ab_hero_eyebrow: 'Our Story', ab_hero_title: 'Built for the love of the big screen',
+      ab_hero_sub: "The Spoiler House is a Cambodian cinema chain bringing premium screens, real Khmer hospitality, and great food to Phnom Penh — one showtime at a time.",
+      ab_who_eyebrow: 'Who We Are', ab_who_heading: 'A hometown cinema, built for everyone',
+      ab_who_p1: "The Spoiler House started with a simple idea: Phnom Penh deserved a cinema that felt as good as the movies it showed. We built our first screen with that in mind, and every location since has followed the same standard — comfortable seating, sharp picture and sound, and a menu worth showing up early for.",
+      ab_who_p2: "Today we operate across three locations in Phnom Penh, each shaped by its neighborhood but sharing the same commitment to accessibility, comfort, and honest pricing. Whether you're catching a Khmer-language premiere, a subtitled Hollywood blockbuster, or bringing the whole family for a weekend matinee, we want every seat in the house to feel like a good one.",
+      ab_stat1: 'Locations in Phnom Penh', ab_stat2: 'Screens citywide', ab_stat3: 'Languages, every showtime page', ab_stat4: 'Days a week, 10am till late',
+      ab_values_eyebrow: 'What Drives Us', ab_values_heading: 'Our values',
+      ab_v1_title: 'Craft over gimmicks', ab_v1_desc: 'We invest in picture quality, sound, and seating first — the parts of the experience you actually feel, every single visit.',
+      ab_v2_title: 'Access for everyone', ab_v2_desc: 'Bilingual EN/KH screens, wheelchair-accessible auditoriums, and assisted listening at select locations, so more people can enjoy the show.',
+      ab_v3_title: 'Honest hospitality', ab_v3_desc: 'Clear pricing, fast concession lines, and a team that treats every guest — regular or first-timer — like they belong here.',
+      ab_journey_eyebrow: 'Our Journey', ab_journey_heading: 'How we got here',
+      ab_t1_time: 'Year 1', ab_t1_title: 'Our first screen opens', ab_t1_desc: 'The Spoiler House opens its first location in Phnom Penh with a focus on comfort and sound quality.',
+      ab_t2_time: 'Year 2', ab_t2_title: 'Concessions get a rebuild', ab_t2_desc: 'We rework our food and drink menu around fast service and combos guests actually order.',
+      ab_t3_time: 'Year 3', ab_t3_title: 'A second and third location', ab_t3_desc: 'Two more cinemas open across the city, each adding new formats like IMAX and Diamond Class.',
+      ab_t4_time: 'Today', ab_t4_title: 'Bilingual, online, and growing', ab_t4_desc: 'Booking, tickets, and the whole site are now available in English and Khmer, with more on the way.',
+      ab_team_eyebrow: 'Behind The Screen', ab_team_heading: 'The teams that run the show',
+      ab_team1_title: 'Guest Experience', ab_team1_desc: 'Box office, ushers, and the friendly faces who greet you at the door.',
+      ab_team2_title: 'Concessions & Culinary', ab_team2_desc: 'The team behind every combo, snack, and drink on the menu.',
+      ab_team3_title: 'Projection & Technical', ab_team3_desc: 'Keeping every screen, speaker, and seat in working order.',
+      ab_cta_title: 'Come see us', ab_cta_sub: 'Book a showtime or find your nearest location.',
+
+      /* ---- contact.html ---- */
+      ct_hero_eyebrow: "We'd Love To Hear From You", ct_hero_title: 'Get in touch',
+      ct_hero_sub: 'Questions about a booking, feedback on a visit, or a partnership idea — reach us however works best for you.',
+      ct_call_title: 'Call Us', ct_call_hours: 'Daily, 9:00 AM – 9:00 PM',
+      ct_email_title: 'Email Us', ct_email_note: 'We reply within one business day',
+      ct_visit_title: 'Visit Us', ct_visit_link: 'See all 3 locations', ct_visit_note: 'AEON Mall Sen Sok · Olympia Mall · Chip Mong Tower',
+      ct_form_eyebrow: 'Send a Message', ct_form_heading: 'Write to our team',
+      ct_label_name: 'Full name', ct_label_email: 'Email address', ct_label_phone: 'Phone number',
+      ct_label_reason: 'Reason for contact', ct_label_message: 'Message', ct_msg_hint: 'Minimum 10 characters.',
+      ct_select_topic: 'Select a topic…', ct_opt_booking: 'Booking support', ct_opt_feedback: 'Feedback about a visit',
+      ct_opt_partnership: 'Partnership or press', ct_opt_careers: 'Careers', ct_opt_other: 'Something else',
+      ct_submit: 'Send Message',
+      ct_locations_eyebrow: 'Find Us', ct_locations_heading: 'Our locations', ct_open_daily: 'Open 10:00 AM – 12:00 AM, daily',
+      ct_open_daily2: 'Open 10:00 AM – 1:00 AM, daily',
+      ct_connected_eyebrow: 'Stay Connected', ct_connected_heading: 'Follow along',
+      ct_faq_eyebrow: 'Before You Ask', ct_faq_heading: 'Frequently asked questions',
+
+      /* ---- privacy / terms ---- */
+      pp_hero_eyebrow: 'Our Story', pp_hero_title: 'Your privacy matters to us.',
+      pp_hero_sub: 'The Spoiler House is a Cambodian cinema chain bringing premium screens, real Khmer hospitality, and great food to Phnom Penh — one showtime at a time.',
+      pp_h_privacy: 'Privacy Policy', pp_h_payment: 'Payment Information', pp_h_legal: 'Legal Requirements',
+      pp_h_business: 'Business Transfers', pp_h_children: "Children's Privacy",
+      tc_hero_title: 'Transparency builds trust. Please review our Terms & Conditions before using our services.',
+      tc_hero_sub: 'The Spoiler House is a Cambodian cinema chain bringing premium screens, real Khmer hospitality, and great food to Phnom Penh — one showtime at a time.',
+      tc_h_main: 'Enjoy the show, respect the rules, and help us create a great movie experience for all.',
+      tc_h_eligibility: 'Eligibility', tc_h_account: 'Account Registration', tc_h_payment: 'Payment',
+      tc_h_rules: 'Cinema Rules & Conduct', tc_h_prohibited: 'Prohibited Activities', tc_h_privacy: 'Privacy',
+
+      /* ---- appstore / playstore ---- */
+      as_hero_eyebrow: 'Our Story', as_hero_title: 'Available soon on Apple App Store',
+      as_hero_sub: 'Our mobile application is currently under review and will be available soon on both the Apple App Store. We are working to complete the approval process and ensure the best possible experience for our users. Thank you for your patience and support. Stay tuned for updates, and we look forward to bringing our cinema booking experience to your mobile device very soon.',
+      ps_hero_title: 'Available soon on Play App Store',
+      ps_hero_sub: 'Our mobile application is currently under review and will be available soon on both the Play App Store. We are working to complete the approval process and ensure the best possible experience for our users. Thank you for your patience and support. Stay tuned for updates, and we look forward to bringing our cinema booking experience to your mobile device very soon.',
+
+      /* ---- join-now.html ---- */
+      jn_tab_login: 'Sign In', jn_tab_signup: 'Create Account', jn_back: 'Back',
+      jn_login_heading: 'Welcome back', jn_login_sub: 'Sign in to access your tickets and bookings.',
+      jn_login_email: 'Email', jn_login_pass: 'Password', jn_login_submit: 'Sign In',
+      jn_no_account: 'No account?', jn_create_one: 'Create one →',
+      jn_signup_heading: 'Join the club', jn_signup_sub: 'Create a free account to book tickets, earn points, and more.',
+      jn_benefit1: 'Save and manage all your e-tickets', jn_benefit2: 'Earn points on every booking', jn_benefit3: 'Free birthday ticket every year',
+      jn_or: 'or fill in your details', jn_name: 'Full Name', jn_email: 'Email', jn_pass: 'Password', jn_confirm: 'Confirm Password',
+      jn_signup_submit: 'Create Account', jn_have_account: 'Already have an account?', jn_sign_in_link: 'Sign in →',
+
+      /* ---- ticket.html / orders.html empty states ---- */
+      tix_empty_title: 'No tickets yet', tix_empty_sub: 'Your booked tickets and e-tickets will show up here after checkout.',
+      tix_page_title: 'My Tickets',
+      ord_empty_title: 'No orders yet', ord_empty_sub: 'Snacks and drinks you order from the Concessions menu will show up here.',
+      ord_page_title: 'My Orders',
+
+      /* ---- cinema.html ---- */
+      cin_find_us: 'Find Us', cin_our_cinemas: 'Our Cinemas', cin_pick_loc: "Pick a location to see showtimes, amenities, and what's playing.",
+      cin_facilities: 'Facilities', cin_amenities: 'Amenities', cin_this_week: 'This Week', cin_now_showing_here: 'Now Showing Here',
+      cin_other_locations: 'Other Locations', cin_not_found: 'Cinema not found',
+
+      /* ---- movie.html ---- */
+      mv_available_at: 'Available At', mv_book_now: 'Book Now', mv_advance_booking: 'Advance Booking', mv_book_now_eyebrow: 'Book Now',
+      mv_keep_exploring: 'Keep Exploring', mv_related: 'You Might Also Like', mv_not_found: 'Movie not found', mv_all_movies: 'All Movies',
+
+      /* ---- promotion.html ---- */
+      pr_dont_miss: "Don't Miss Out", pr_title: 'Promotions', pr_more_ways: 'More Ways to Save', pr_current_deals: 'Current Deals',
+
+      /* ---- food_drink.html ---- */
+      fd_eyebrow: 'Concessions', fd_pickup: 'Pickup at the counter', fd_title: 'Enhance Your Experience',
+      fd_sub: 'Order your favorite snacks and drinks ahead — ready for pickup when you arrive.',
+    },
+
+    kh: {
+      nav_home: 'ទំព័រដើម', nav_cinemas: 'រោងភាពយន្ត', nav_about: 'អំពីយើង', nav_contact: 'ទំនាក់ទំនង',
+      search: 'ស្វែងរកភាពយន្ត រោងភាពយន្ត...', myTickets: '🎟 សំបុត្ររបស់ខ្ញុំ', joinNow: 'ចុះឈ្មោះ',
+      navOffers: '🎟 ការផ្តល់ជូន', navFnb: '🍿 អាហារ &amp; ភេសជ្ជៈ',
+      hero1Badge: '🍿 សេវាកម្មបញ្ជូន Combo ប្រញាប់', hero1Title: 'ពោតលីង &amp; កូកា-កូឡា,<br>បញ្ជូនដល់កៅអីរបស់អ្នក', hero1Sub: 'កម្មង់ជាមុន និងរំលងជួរលក់អាហារ។ ពោតលីងក្តៅៗ និងកូកាកូឡាត្រជាក់កំពុងរង់ចាំអ្នកនៅកៅអីរបស់អ្នក។',
+      hero2Badge: '🎬 កំពុងចាក់បញ្ចាំង', hero2Title: 'Minions &amp; Monsters<br>នៅក្នុង IMAX', hero2Sub: 'ក្រុម Minion ដែលត្រូវគេបណ្តេញចេញ ព្យាយាមផលិតរឿងខ្មោចផ្ទាល់ខ្លួន ដោយអចេតនាកោះហៅសត្វចម្លែកភាពយន្តពិតៗមកវាយប្រហារពិភពលោក។',
+      hero3Badge: '⭐ សមាជិកភាព The Spoiler House', hero3Title: 'ចូលរួម Spoiler House Club, រកពិន្ទុរាល់សំបុត្រ', hero3Sub: 'សំបុត្រថ្ងៃខួបកំណើតឥតគិតថ្លៃ ពិន្ទុទ្វេដងរៀងរាល់ថ្ងៃអង្គារ និងសិទ្ធិកក់ទុកជាមុន។',
+      moviesEyebrow: 'សប្តាហ៍នេះ', moviesTitle: 'ភាពយន្ត', tabShowing: 'កំពុងចាក់', tabSoon: 'ឆាប់ៗនេះ',
+      cinemasEyebrow: 'ស្វែងរកយើង', cinemasTitle: 'រោងភាពយន្តរបស់យើង', cinemaCity: 'ភ្នំពេញ',
+      footerCompany: 'ក្រុមហ៊ុន', footerAbout: 'អំពីយើង', footerContact: 'ទំនាក់ទំនង', footerCinemas: 'រោងភាពយន្ត',
+      footerSupport: 'ជំនួយ', footerPromotions: 'ការផ្តល់ជូន', footerNews: 'ព័ត៌មាន &amp; សកម្មភាព', footerMyTicket: 'សំបុត្ររបស់ខ្ញុំ',
+      footerTerms: 'លក្ខខណ្ឌ &amp; លក្ខខណ្ឌ', footerPrivacy: 'គោលការណ៍ឯកជនភាព',
+      btn_book_tickets: 'កម្មង់សំបុត្រ', btn_find_cinema: 'ស្វែងរករោងភាពយន្ត', btn_contact_us: 'ទាក់ទងយើង',
+      btn_back_home: 'ត្រឡប់ទៅទំព័រដើម', btn_browse_movies: 'រកមើលភាពយន្ត', btn_all_movies: 'ភាពយន្តទាំងអស់',
+      btn_all_cinemas: 'រោងភាពយន្តទាំងអស់', btn_view_all_cinemas: 'មើលរោងភាពយន្តទាំងអស់', btn_all_promotions: 'ការផ្តល់ជូនទាំងអស់',
+      btn_get_directions: 'ទទួលទិសដៅ', btn_order_now: 'កម្មង់ឥឡូវ', btn_learn_more: 'ស្វែងយល់បន្ថែម',
+      btn_view_deal: 'មើលការផ្តល់ជូន', btn_book_now: 'កម្មង់ឥឡូវ', btn_view_details: 'មើលព័ត៌មាន',
+      btn_order_food: 'កម្មង់អាហារ & ភេសជ្ជៈ', btn_my_orders: '🧾 ការបញ្ជាទិញរបស់ខ្ញុំ', btn_download_again: 'ទាញយកម្តងទៀត',
+      footer_copyright: '© ២០២៦ រោងភាពយន្ត The Spoiler House។ រក្សាសិទ្ធិគ្រប់យ៉ាង។',
+
+      ab_hero_eyebrow: 'រឿងរបស់យើង', ab_hero_title: 'សាងសង់ឡើងសម្រាប់សេចក្តីស្រឡាញ់ចំពោះអេក្រង់ធំ',
+      ab_hero_sub: 'The Spoiler House គឺជាខ្សែសង្វាក់រោងភាពយន្តកម្ពុជា ដែលនាំមកនូវអេក្រង់ឧត្តម ការទទួលភ្ញៀវបែបខ្មែរពិតប្រាកដ និងអាហារឆ្ងាញ់ៗនៅភ្នំពេញ។',
+      ab_who_eyebrow: 'អ្នកជានរណា', ab_who_heading: 'រោងភាពយន្តមូលដ្ឋាន សាងសង់សម្រាប់មនុស្សគ្រប់គ្នា',
+      ab_who_p1: 'The Spoiler House ចាប់ផ្តើមឡើងពីគំនិតសាមញ្ញមួយ៖ ភ្នំពេញសមនឹងទទួលបានរោងភាពយន្តដែលល្អដូចភាពយន្តដែលវាបញ្ចាំង។ យើងបានសាងសង់អេក្រង់ដំបូងរបស់យើងដោយផ្អែកលើគំនិតនោះ ហើយគ្រប់ទីតាំងបន្ទាប់មកសុទ្ធតែធ្វើតាមស្តង់ដារដូចគ្នា — កៅអីស្រួល រូបភាព និងសំឡេងច្បាស់ និងម៉ឺនុយសមនឹងមកមុនម៉ោង។',
+      ab_who_p2: 'សព្វថ្ងៃនេះ យើងបើកដំណើរការនៅបីទីតាំងក្នុងភ្នំពេញ ដែលនីមួយៗត្រូវបានរៀបចំតាមសហគមន៍ជុំវិញ ប៉ុន្តែសុទ្ធតែមានការប្តេជ្ញាចិត្តដូចគ្នាចំពោះភាពងាយស្រួល ភាពស្រួលសបាយ និងតម្លៃត្រឹមត្រូវ។',
+      ab_stat1: 'ទីតាំងនៅភ្នំពេញ', ab_stat2: 'អេក្រង់ទូទាំងទីក្រុង', ab_stat3: 'ភាសា គ្រប់ទំព័រកម្មវិធីបញ្ចាំង', ab_stat4: 'ថ្ងៃក្នុងមួយសប្តាហ៍ ចាប់ពី ១០ព្រឹក',
+      ab_values_eyebrow: 'អ្វីដែលជំរុញយើង', ab_values_heading: 'តម្លៃរបស់យើង',
+      ab_v1_title: 'សិល្បៈជាងល្បិចកល', ab_v1_desc: 'យើងវិនិយោគលើគុណភាពរូបភាព សំឡេង និងកៅអីជាមុនគេ — ជាផ្នែកដែលអ្នកពិតជាមានអារម្មណ៍ក្នុងរាល់ការមកលេង។',
+      ab_v2_title: 'ភាពងាយស្រួលសម្រាប់មនុស្សគ្រប់គ្នា', ab_v2_desc: 'អេក្រង់ពីរភាសា EN/KH កន្លែងអង្គុយងាយស្រួលសម្រាប់អ្នកអង្គុយរទេះរុញ និងជំនួយស្តាប់នៅទីតាំងខ្លះ។',
+      ab_v3_title: 'ការទទួលភ្ញៀវស្មោះត្រង់', ab_v3_desc: 'តម្លៃច្បាស់លាស់ ជួរទិញអាហាររហ័ស និងក្រុមការងារដែលចាត់ទុកភ្ញៀវគ្រប់រូបដូចជាកម្មសិទ្ធិកន្លែងនេះ។',
+      ab_journey_eyebrow: 'ដំណើររបស់យើង', ab_journey_heading: 'របៀបដែលយើងមកដល់ទីនេះ',
+      ab_t1_time: 'ឆ្នាំទី ១', ab_t1_title: 'អេក្រង់ដំបូងបើក', ab_t1_desc: 'The Spoiler House បើកទីតាំងដំបូងនៅភ្នំពេញ ដោយផ្តោតលើភាពស្រួលសបាយ និងគុណភាពសំឡេង។',
+      ab_t2_time: 'ឆ្នាំទី ២', ab_t2_title: 'កែលម្អផ្នែកម្ហូបអាហារ', ab_t2_desc: 'យើងកែសម្រួលម៉ឺនុយអាហារនិងភេសជ្ជៈឡើងវិញ ដើម្បីឲ្យសេវាកម្មលឿន និងកញ្ចប់ដែលភ្ញៀវពិតជាចង់កម្មង់។',
+      ab_t3_time: 'ឆ្នាំទី ៣', ab_t3_title: 'ទីតាំងទី២ និងទី៣', ab_t3_desc: 'រោងភាពយន្តពីរបន្ថែមទៀតបានបើកនៅទូទាំងទីក្រុង ដោយបន្ថែមទម្រង់ថ្មីៗដូចជា IMAX និង Diamond Class។',
+      ab_t4_time: 'បច្ចុប្បន្ន', ab_t4_title: 'ពីរភាសា អនឡាញ និងកំពុងរីកចម្រើន', ab_t4_desc: 'ការកក់ សំបុត្រ និងគេហទំព័រទាំងមូល ឥឡូវនេះមានទាំងភាសាអង់គ្លេស និងខ្មែរ។',
+      ab_team_eyebrow: 'ក្រោយអេក្រង់', ab_team_heading: 'ក្រុមការងារដែលដំណើរការកម្មវិធីនេះ',
+      ab_team1_title: 'បទពិសោធន៍ភ្ញៀវ', ab_team1_desc: 'ការិយាល័យលក់សំបុត្រ អ្នកបម្រើ និងមុខសើមស្រស់ដែលស្វាគមន៍អ្នកនៅមាត់ទ្វារ។',
+      ab_team2_title: 'អាហារ & ភេសជ្ជៈ', ab_team2_desc: 'ក្រុមការងារនៅពីក្រោយកញ្ចប់ អាហារសម្រន់ និងភេសជ្ជៈគ្រប់មុខនៅលើម៉ឺនុយ។',
+      ab_team3_title: 'បច្ចេកទេស និងការបញ្ចាំង', ab_team3_desc: 'រក្សាអេក្រង់ ឧបករណ៍បំពងសំឡេង និងកៅអីគ្រប់កៅអីឲ្យដំណើរការល្អ។',
+      ab_cta_title: 'មកលេងយើង', ab_cta_sub: 'កម្មង់ម៉ោងបញ្ចាំង ឬស្វែងរកទីតាំងជិតបំផុត។',
+
+      ct_hero_eyebrow: 'យើងចង់ស្តាប់ពីអ្នក', ct_hero_title: 'ទាក់ទងមកកាន់យើង',
+      ct_hero_sub: 'សំណួរអំពីការកក់ ធាតុចូលអំពីការមកលេង ឬគំនិតសហការ — ទាក់ទងយើងតាមមធ្យោបាយណាដែលងាយស្រួលបំផុតសម្រាប់អ្នក។',
+      ct_call_title: 'ទូរស័ព្ទមកយើង', ct_call_hours: 'រៀងរាល់ថ្ងៃ ៩ព្រឹក – ៩យប់',
+      ct_email_title: 'អ៊ីមែលមកយើង', ct_email_note: 'យើងឆ្លើយតបក្នុងរយៈពេលមួយថ្ងៃធ្វើការ',
+      ct_visit_title: 'មកលេងយើង', ct_visit_link: 'មើលទីតាំងទាំង ៣', ct_visit_note: 'AEON Mall Sen Sok · Olympia Mall · Chip Mong Tower',
+      ct_form_eyebrow: 'ផ្ញើសារ', ct_form_heading: 'សរសេរទៅកាន់ក្រុមការងាររបស់យើង',
+      ct_label_name: 'ឈ្មោះពេញ', ct_label_email: 'អាសយដ្ឋានអ៊ីមែល', ct_label_phone: 'លេខទូរស័ព្ទ',
+      ct_label_reason: 'មូលហេតុនៃការទាក់ទង', ct_label_message: 'សារ', ct_msg_hint: 'យ៉ាងតិច ១០ តួអក្សរ។',
+      ct_select_topic: 'ជ្រើសរើសប្រធានបទ…', ct_opt_booking: 'ជំនួយការកក់', ct_opt_feedback: 'មតិយោបល់អំពីការមកលេង',
+      ct_opt_partnership: 'ភាពជាដៃគូ ឬសារព័ត៌មាន', ct_opt_careers: 'ការងារ', ct_opt_other: 'រឿងផ្សេងទៀត',
+      ct_submit: 'ផ្ញើសារ',
+      ct_locations_eyebrow: 'ស្វែងរកយើង', ct_locations_heading: 'ទីតាំងរបស់យើង', ct_open_daily: 'បើក ១០ព្រឹក – ១២យប់ រៀងរាល់ថ្ងៃ',
+      ct_open_daily2: 'បើក ១០ព្រឹក – ១ព្រឹក រៀងរាល់ថ្ងៃ',
+      ct_connected_eyebrow: 'តាមដានយើង', ct_connected_heading: 'តាមដានយើងនៅបណ្តាញសង្គម',
+      ct_faq_eyebrow: 'មុននឹងសួរ', ct_faq_heading: 'សំណួរដែលសួរញឹកញាប់',
+
+      pp_hero_eyebrow: 'រឿងរបស់យើង', pp_hero_title: 'ភាពឯកជនរបស់អ្នកសំខាន់សម្រាប់យើង។',
+      pp_hero_sub: 'The Spoiler House គឺជាខ្សែសង្វាក់រោងភាពយន្តកម្ពុជា ដែលនាំមកនូវអេក្រង់ឧត្តម ការទទួលភ្ញៀវបែបខ្មែរពិតប្រាកដ និងអាហារឆ្ងាញ់ៗនៅភ្នំពេញ។',
+      pp_h_privacy: 'គោលការណ៍ភាពឯកជន', pp_h_payment: 'ព័ត៌មានទូទាត់ប្រាក់', pp_h_legal: 'តម្រូវការផ្លូវច្បាប់',
+      pp_h_business: 'ការផ្ទេរអាជីវកម្ម', pp_h_children: 'ភាពឯកជនរបស់កុមារ',
+      tc_hero_title: 'តម្លាភាពកសាងទំនុកចិត្ត។ សូមពិនិត្យលក្ខខណ្ឌប្រើប្រាស់របស់យើងមុននឹងប្រើសេវាកម្ម។',
+      tc_hero_sub: 'The Spoiler House គឺជាខ្សែសង្វាក់រោងភាពយន្តកម្ពុជា ដែលនាំមកនូវអេក្រង់ឧត្តម ការទទួលភ្ញៀវបែបខ្មែរពិតប្រាកដ និងអាហារឆ្ងាញ់ៗនៅភ្នំពេញ។',
+      tc_h_main: 'រីករាយនឹងកម្មវិធីបញ្ចាំង គោរពវិន័យ និងជួយយើងបង្កើតបទពិសោធន៍ភាពយន្តដ៏ល្អសម្រាប់មនុស្សគ្រប់គ្នា។',
+      tc_h_eligibility: 'លក្ខណៈសម្បត្តិ', tc_h_account: 'ការចុះឈ្មោះគណនី', tc_h_payment: 'ការទូទាត់ប្រាក់',
+      tc_h_rules: 'វិន័យ និងអាកប្បកិរិយានៅរោងភាពយន្ត', tc_h_prohibited: 'សកម្មភាពដែលហាមឃាត់', tc_h_privacy: 'ភាពឯកជន',
+
+      as_hero_eyebrow: 'រឿងរបស់យើង', as_hero_title: 'ឆាប់ៗនេះនៅលើ Apple App Store',
+      as_hero_sub: 'កម្មវិធីទូរស័ព្ទរបស់យើងកំពុងស្ថិតក្នុងការត្រួតពិនិត្យ ហើយនឹងមានឆាប់ៗនេះនៅលើ Apple App Store។ អរគុណសម្រាប់ការអត់ធ្មត់ និងការគាំទ្ររបស់អ្នក។',
+      ps_hero_title: 'ឆាប់ៗនេះនៅលើ Play Store',
+      ps_hero_sub: 'កម្មវិធីទូរស័ព្ទរបស់យើងកំពុងស្ថិតក្នុងការត្រួតពិនិត្យ ហើយនឹងមានឆាប់ៗនេះនៅលើ Google Play Store។ អរគុណសម្រាប់ការអត់ធ្មត់ និងការគាំទ្ររបស់អ្នក។',
+
+      jn_tab_login: 'ចូលគណនី', jn_tab_signup: 'បង្កើតគណនី', jn_back: 'ត្រឡប់ក្រោយ',
+      jn_login_heading: 'សូមស្វាគមន៍ការត្រឡប់មកវិញ', jn_login_sub: 'ចូលគណនីដើម្បីមើលសំបុត្រ និងការកក់របស់អ្នក។',
+      jn_login_email: 'អ៊ីមែល', jn_login_pass: 'ពាក្យសម្ងាត់', jn_login_submit: 'ចូលគណនី',
+      jn_no_account: 'មិនទាន់មានគណនី?', jn_create_one: 'បង្កើតគណនីថ្មី →',
+      jn_signup_heading: 'ចូលរួមក្លឹប', jn_signup_sub: 'បង្កើតគណនីឥតគិតថ្លៃដើម្បីកម្មង់សំបុត្រ សន្សំពិន្ទុ និងច្រើនទៀត។',
+      jn_benefit1: 'រក្សាទុក និងគ្រប់គ្រងសំបុត្រអេឡិចត្រូនិករបស់អ្នក', jn_benefit2: 'សន្សំពិន្ទុរាល់ការកក់', jn_benefit3: 'សំបុត្រថ្ងៃខួបកំណើតឥតគិតថ្លៃរៀងរាល់ឆ្នាំ',
+      jn_or: 'ឬបំពេញព័ត៌មានលម្អិត', jn_name: 'ឈ្មោះពេញ', jn_email: 'អ៊ីមែល', jn_pass: 'ពាក្យសម្ងាត់', jn_confirm: 'បញ្ជាក់ពាក្យសម្ងាត់',
+      jn_signup_submit: 'បង្កើតគណនី', jn_have_account: 'មានគណនីរួចហើយ?', jn_sign_in_link: 'ចូលគណនី →',
+
+      tix_empty_title: 'មិនទាន់មានសំបុត្រនៅឡើយ', tix_empty_sub: 'សំបុត្រដែលអ្នកបានកក់ និងសំបុត្រអេឡិចត្រូនិកនឹងបង្ហាញនៅទីនេះបន្ទាប់ពីទូទាត់ប្រាក់។',
+      tix_page_title: 'សំបុត្ររបស់ខ្ញុំ',
+      ord_empty_title: 'មិនទាន់មានការបញ្ជាទិញនៅឡើយ', ord_empty_sub: 'អាហារសម្រន់ និងភេសជ្ជៈដែលអ្នកបញ្ជាទិញនឹងបង្ហាញនៅទីនេះ។',
+      ord_page_title: 'ការបញ្ជាទិញរបស់ខ្ញុំ',
+
+      cin_find_us: 'ស្វែងរកយើង', cin_our_cinemas: 'រោងភាពយន្តរបស់យើង', cin_pick_loc: 'ជ្រើសរើសទីតាំងដើម្បីមើលម៉ោងបញ្ចាំង សម្ភារៈ និងអ្វីដែលកំពុងចាក់បញ្ចាំង។',
+      cin_facilities: 'សម្ភារៈបរិក្ខារ', cin_amenities: 'សម្ភារៈបំរើសេវា', cin_this_week: 'សប្តាហ៍នេះ', cin_now_showing_here: 'កំពុងចាក់បញ្ចាំងនៅទីនេះ',
+      cin_other_locations: 'ទីតាំងផ្សេងទៀត', cin_not_found: 'រកមិនឃើញរោងភាពយន្ត',
+
+      mv_available_at: 'អាចកម្មង់បាននៅ', mv_book_now: 'កម្មង់ឥឡូវ', mv_advance_booking: 'កក់សំបុត្រជាមុន', mv_book_now_eyebrow: 'កម្មង់ឥឡូវ',
+      mv_keep_exploring: 'បន្តរកមើល', mv_related: 'អ្នកអាចនឹងចូលចិត្តផងដែរ', mv_not_found: 'រកមិនឃើញភាពយន្ត', mv_all_movies: 'ភាពយន្តទាំងអស់',
+
+      pr_dont_miss: 'កុំឲ្យខកខាន', pr_title: 'ការផ្តល់ជូន', pr_more_ways: 'វិធីបន្ថែមដើម្បីសន្សំ', pr_current_deals: 'ការផ្តល់ជូនបច្ចុប្បន្ន',
+
+      fd_eyebrow: 'អាហារ & ភេសជ្ជៈ', fd_pickup: 'ទទួលនៅកន្លែងលក់', fd_title: 'បង្កើនបទពិសោធន៍របស់អ្នក',
+      fd_sub: 'កម្មង់អាហារសម្រន់ និងភេសជ្ជៈពេញចិត្តរបស់អ្នកជាមុន — រួចរាល់សម្រាប់ទទួលនៅពេលអ្នកមកដល់។',
+    }
+  };
+
+  let currentLang = localStorage.getItem(LANG_KEY) || 'en';
+
+  function applyLang(lang){
+    currentLang = lang;
+    localStorage.setItem(LANG_KEY, lang);
+    const dict = T[lang];
+
+    /* Update all data-i18n elements */
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if(dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+
+    /* Update placeholders */
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.dataset.i18nPlaceholder;
+      if(dict[key] !== undefined) el.placeholder = dict[key];
+    });
+
+    /* Update lang-switch button states */
+    document.querySelectorAll('#langSwitch button').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+
+    /* Update html lang attribute */
+    document.documentElement.lang = lang === 'kh' ? 'km' : 'en';
+  }
+
+  /* Wire up buttons */
+  document.querySelectorAll('#langSwitch button').forEach(b => {
+    b.addEventListener('click', () => applyLang(b.dataset.lang));
+  });
+
+  /* Apply saved lang on load */
+  applyLang(currentLang);
+
+  /* Expose for movie card renderer to pick up translated strings */
+  window.getT = () => T[currentLang];
+})();
+</script>
+<script src="Assets/assets/js/bootstrap.js"></script>
+<script src="Assets/assets/js/bootstrap.bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+/* ============================================================
+   MOVIE DETAIL — extends Style.css + booking.css tokens
+   (--primary, --bg, --card, --border, --radius-lg, --ease, etc.)
+   ============================================================ */
+
+.mv-page{
+  max-width:1100px;
+  margin:0 auto;
+  padding:8px 24px 100px;
+}
+
+.mv-detail-back{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:600;color:var(--text-secondary);
+  margin:24px 0 24px;
+  transition:color .2s;
+}
+.mv-detail-back:hover{color:var(--text);}
+.mv-detail-back svg{width:14px;height:14px;}
+
+/* ===== HERO ===== */
+.mv-hero{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:36px;
+  margin-bottom:40px;
+}
+@media (max-width:720px){
+  .mv-hero{grid-template-columns:1fr;}
+}
+
+.mv-poster-wrap{
+  position:relative;
+  aspect-ratio:2/3;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:0 24px 56px -18px rgba(0,0,0,.7);
+}
+.mv-poster-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+
+.mv-info{display:flex;flex-direction:column;}
+.mv-badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+.mv-age-badge{
+  font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:7px;
+  background:rgba(255,255,255,.08);color:var(--text);
+}
+.mv-rating-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:7px;
+  background:rgba(255,255,255,.08);
+}
+.mv-rating-badge svg{width:12px;height:12px;color:#FFB800;}
+.mv-soon-badge{
+  font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:7px;
+  background:var(--crimson-glow);color:var(--primary);
+}
+
+.mv-title{
+  font-size:clamp(24px,4vw,36px);font-weight:600;line-height:1.15;
+  margin-bottom:10px;
+}
+.mv-meta-row{
+  display:flex;flex-wrap:wrap;gap:8px 14px;
+  font-size:13.5px;color:var(--text-secondary);
+  margin-bottom:22px;
+}
+.mv-meta-row span:not(:last-child)::after{content:'•';margin-left:14px;color:var(--border);}
+
+.mv-synopsis{
+  font-size:14.5px;line-height:1.75;color:var(--text-secondary);
+  max-width:60ch;
+  margin-bottom:26px;
+}
+
+.mv-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:auto;}
+
+/* ===== QUICK FACTS ===== */
+.mv-facts{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-bottom:40px;
+}
+@media (max-width:720px){.mv-facts{grid-template-columns:repeat(2,1fr);}}
+.mv-fact{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:14px 16px;
+}
+.mv-fact-label{
+  font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--text-secondary);margin-bottom:5px;
+}
+.mv-fact-val{font-size:14px;font-weight:600;}
+
+/* ===== AVAILABLE AT ===== */
+.mv-cinemas-head{margin-bottom:16px;}
+.mv-cinema-list{display:flex;flex-direction:column;gap:10px;margin-bottom:44px;}
+.mv-cinema-pill{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 18px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  transition:all .2s var(--ease);
+}
+.mv-cinema-pill:hover{border-color:var(--primary);background:var(--crimson-glow);}
+.mv-cinema-pill-name{font-weight:600;font-size:14.5px;}
+.mv-cinema-pill-city{font-size:12.5px;color:var(--text-secondary);margin-top:2px;}
+.mv-cinema-pill-arrow{width:16px;height:16px;color:var(--text-secondary);flex-shrink:0;transition:transform .2s var(--ease);}
+.mv-cinema-pill:hover .mv-cinema-pill-arrow{transform:translateX(3px);color:var(--primary);}
+
+/* ===== YOU MIGHT ALSO LIKE ===== */
+.mv-related-head{margin-top:8px;margin-bottom:4px;}
+
+/* ===== NOT FOUND ===== */
+.mv-notfound{
+  max-width:440px;margin:100px auto;text-align:center;padding:0 24px;
+}
+.mv-notfound-icon{font-size:34px;margin-bottom:18px;}
+.mv-notfound-title{font-size:22px;font-weight:600;margin-bottom:8px;}
+.mv-notfound-sub{font-size:14px;color:var(--text-secondary);margin-bottom:26px;line-height:1.6;}

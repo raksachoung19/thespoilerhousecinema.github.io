@@ -1,0 +1,145 @@
+/* ============================================================
+   CINEMA DETAIL / LOCATIONS — extends Style.css + booking.css tokens
+   (--primary, --bg, --card, --border, --radius-lg, --ease, etc.)
+   ============================================================ */
+
+.cin-page{
+  max-width:1100px;
+  margin:0 auto;
+  padding:8px 24px 100px;
+}
+
+/* ===== BOARD VIEW (choose a cinema) ===== */
+.cin-board-head{padding:24px 0 8px;}
+.cin-board-head .section-sub{
+  color:var(--text-secondary);font-size:14px;margin-top:4px;
+}
+
+/* ===== DETAIL VIEW ===== */
+.cin-detail-back{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:600;color:var(--text-secondary);
+  margin:24px 0 20px;
+  transition:color .2s;
+}
+.cin-detail-back:hover{color:var(--text);}
+.cin-detail-back svg{width:14px;height:14px;}
+
+.cin-hero{
+  position:relative;
+  border-radius:var(--radius-lg);
+  border:1px solid var(--border);
+  overflow:hidden;
+  padding:40px 36px;
+  background:
+    radial-gradient(circle at 15% 20%, var(--crimson-glow) 0%, transparent 55%),
+    linear-gradient(160deg, #1a1a1c 0%, #0f0f10 100%);
+  margin-bottom:28px;
+}
+.cin-hero-icon{
+  width:56px;height:56px;border-radius:16px;
+  background:rgba(229,9,20,.12);
+  border:1px solid rgba(229,9,20,.3);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--primary);
+  margin-bottom:18px;
+}
+.cin-hero-icon svg{width:26px;height:26px;}
+.cin-hero-name{
+  font-size:clamp(22px,3.6vw,32px);font-weight:600;line-height:1.2;
+  margin-bottom:8px;
+}
+.cin-hero-city{
+  font-size:14px;color:var(--text-secondary);margin-bottom:22px;
+}
+.cin-hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+
+/* ===== QUICK FACTS ===== */
+.cin-facts{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-bottom:28px;
+}
+@media (max-width:700px){.cin-facts{grid-template-columns:1fr;}}
+.cin-fact{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:16px 18px;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.cin-fact-icon{
+  width:32px;height:32px;border-radius:9px;flex-shrink:0;
+  background:rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-secondary);
+}
+.cin-fact-icon svg{width:16px;height:16px;}
+.cin-fact-label{
+  font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--text-secondary);margin-bottom:3px;
+}
+.cin-fact-val{font-size:14px;font-weight:600;line-height:1.4;}
+
+/* ===== FORMATS ===== */
+.cin-formats{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px;}
+.cin-format-pill{
+  padding:8px 16px;border-radius:999px;
+  background:var(--card);
+  border:1px solid var(--border);
+  font-size:12.5px;font-weight:700;letter-spacing:.03em;
+  color:var(--text);
+}
+
+/* ===== AMENITIES ===== */
+.cin-amenities{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:20px;
+  margin-bottom:44px;
+}
+@media (max-width:700px){.cin-amenities{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:460px){.cin-amenities{grid-template-columns:1fr;}}
+.cin-amenity{
+  display:flex;align-items:center;gap:12px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:14px 16px;
+  font-size:13.5px;font-weight:600;
+}
+.cin-amenity-icon{font-size:19px;flex-shrink:0;}
+
+/* ===== NOW SHOWING (reuses .movie-grid / .movie-card from Style.css) ===== */
+.cin-showing-head{margin-top:8px;margin-bottom:4px;}
+
+/* ===== OTHER LOCATIONS SWITCHER ===== */
+.cin-switcher{
+  margin-top:56px;
+  padding-top:28px;
+  border-top:1px solid var(--border);
+}
+.cin-switcher-label{
+  font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--text-secondary);margin-bottom:14px;
+}
+.cin-switcher-list{display:flex;flex-wrap:wrap;gap:10px;}
+.cin-switcher-pill{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 16px;border-radius:999px;
+  background:var(--card);
+  border:1px solid var(--border);
+  font-size:13px;font-weight:600;
+  transition:all .2s var(--ease);
+}
+.cin-switcher-pill:hover{border-color:var(--primary);background:var(--crimson-glow);}
+
+/* ===== NOT FOUND ===== */
+.cin-notfound{
+  max-width:440px;margin:100px auto;text-align:center;padding:0 24px;
+}
+.cin-notfound-icon{font-size:34px;margin-bottom:18px;}
+.cin-notfound-title{font-size:22px;font-weight:600;margin-bottom:8px;}
+.cin-notfound-sub{font-size:14px;color:var(--text-secondary);margin-bottom:26px;line-height:1.6;}

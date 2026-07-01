@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Details — The Spoiler House</title>
+  <link rel="stylesheet" href="Style.css">
+  <link rel="stylesheet" href="booking.css">
+  <link rel="stylesheet" href="movie.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="booking-body">
+
+<header class="bk-topbar">
+  <a href="index.html" class="bk-back" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </a>
+  <a href="index.html" class="bk-logo serif">The Spoiler House</a>
+  <div class="bk-topbar-spacer"></div>
+  <div class="lang-switch" id="langSwitch">
+    <button class="active" data-lang="en">EN</button>
+    <button data-lang="kh">KH</button>
+  </div>
+</header>
+
+<main id="mvMain"></main>
+
+<script>
+(function(){
+  /* ==========================================================
+     MOVIE DATA — same catalog as the homepage, plus a synopsis
+     ========================================================== */
+  const MOVIES = {
+    showing: [
+      {title:'Suzzanna: witchcraft', genre:'Action, Thriller', dur:'2h 15m', age:'R18', lang:'EN (Sub KH)', rating:8.6, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000218', synopsis:"A village healer's quiet life unravels when an ancient curse resurfaces, forcing her to confront a darkness that has haunted her family for generations."},
+      {title:'Supergirl', genre:'Action, Adventure, Superhero', dur:'1h 48m', age:'NC15', lang:'EN (Sub KH)', rating:7.9, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000137', synopsis:'A young hero finds her own path to heroism when a threat only she can stop puts the city she calls home in danger.'},
+      {title:'Combined Funerals', genre:'Horror', dur:'1h 19m', age:'G', lang:'EN (Sub KH)', rating:7.2, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000250', synopsis:'When two feuding families are forced to share a single wake, old grudges awaken something far more dangerous than either side bargained for.'},
+      {title:'Shake rattle & Roll: Evil Origins', genre:'Horror', dur:'2h 25m', age:'NC15', lang:'EN (Sub KH)', rating:8.9, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000243', synopsis:"An anthology of interconnected nightmares traces a small town's cursed history back to the night it all began."},
+      {title:'Where It Began', genre:'Horror', dur:'1h 55m', age:'NC15', lang:'KH Dub', rating:8.1, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000247', synopsis:'Friends returning to their childhood home uncover the true story behind a disappearance that changed their lives forever.'},
+      {title:'Death House', genre:'Crime, Thriller', dur:'1h 29m', age:'R18', lang:'Indo (Sub EN/KH)', rating:7.5, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000093', synopsis:'A disgraced detective is pulled back into the case that ended her career when bodies start turning up in the same abandoned house.'},
+      {title:'Toy Story: Reunion', genre:'Animation, Family', dur:'1h 42m', age:'All', lang:'EN (Sub KH)', rating:9.0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000136', synopsis:'Beloved toys reunite for one more adventure as their world faces its biggest change yet.'},
+      {title:'Colony', genre:'Thriller, Action', dur:'2h 3m', age:'R18', lang:'KH', rating:8.3, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000185', synopsis:"As resources run out aboard a stranded space colony, its residents must decide how far they'll go to survive."},
+      {title:'Death Girlfriend', genre:'horror', dur:'1h 28m', age:'NC15', lang:'KH (Sub EN)', rating:9.0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000203', synopsis:"A whirlwind romance takes a sinister turn when a young man realizes the woman he's falling for isn't entirely of this world."},
+      {title:'Disclosure Day', genre:'Science, Fiction, Thriller', dur:'2h 25m', age:'NC15', lang:'EN (Sub KH)', rating:8.3, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000184', synopsis:"On the day humanity finally makes contact, one family finds itself at the center of a truth the world isn't ready for."},
+      {title:'Spider-man: Brand New Day', genre:'Superhero, Adventure,Action', dur:'2h 20min', age:'All', lang:'EN (Sub KH)', rating:'9.0', poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000207', synopsis:"Set four years after Spider-Man: No Way Home, Peter Parker lives as an adult entirely alone."}
+      
+    ],
+    soon: [
+      {title:'Obssession', genre:'Horror, Thriller, Romance', dur:'1h 49m', age:'r18', lang:'EN', rating:0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000276', upcoming:'Jul 10', synopsis:'A passionate new relationship curdles into something far more possessive, blurring the line between devotion and danger.'},
+      {title:'Minions & Monsters', genre:'Animation, Adventure, Science Fiction', dur:'1h 30m', age:'13+', lang:'EN', rating:0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000186', upcoming:'Jul 17', synopsis:'A duo of clumsy Minion outcasts who attempt to produce their own monster movie, inadvertently summoning a horde of real cinematic monsters that threaten to destroy the world.'},
+      {title:'Moana(Live Action)', genre:'Adventure', dur:'1h 55m', age:'All', lang:'EN (Sub KH)', rating:0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000138', upcoming:'Jul 24', synopsis:'An island wayfinder sets out on a bold journey across the open sea, guided by courage and the call of the unknown.'},
+      {title:'The Black House', genre:'Horror', dur:'1h 45m', age:'NC15', lang:'EN/KH', rating:0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000191', upcoming:'Aug 1', synopsis:'A family moves into a house with a history they were never told, and the secrets buried within its walls refuse to stay buried.'}
+    ]
+  };
+
+  const CINEMAS = [
+    {name:'Spoiler House — AEON Mall Sen Sok', city:'Phnom Penh'},
+    {name:'Spoiler House — Olympia Mall', city:'Phnom Penh'},
+    {name:'Spoiler House — Chip Mong Tower', city:'Phnom Penh'}
+  ];
+
+  function allMovies(){ return [...MOVIES.showing, ...MOVIES.soon]; }
+  function findMovie(title){ return allMovies().find(m => m.title === title); }
+  function isUpcoming(m){ return !!m.upcoming; }
+
+  const main = document.getElementById('mvMain');
+  const params = new URLSearchParams(window.location.search);
+  const requestedTitle = params.get('title');
+  const movie = requestedTitle ? findMovie(requestedTitle) : null;
+
+  if(movie){
+    renderDetail(movie);
+  } else {
+    renderNotFound(requestedTitle);
+  }
+
+  function starSvg(){return `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.6 7.2.9-5.3 5 1.5 7.1L12 18l-6.5 3.6L7 14.5l-5.3-5 7.2-.9z"/></svg>`;}
+  function backArrowSvg(){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>`;}
+  function arrowRightSvg(){return `<svg class="mv-cinema-pill-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>`;}
+
+  /* ==================== NOT FOUND ==================== */
+  function renderNotFound(title){
+    main.innerHTML = `
+      <div class="mv-notfound">
+        <div class="mv-notfound-icon">🎬</div>
+        <div class="mv-notfound-title serif">Movie not found</div>
+        <p class="mv-notfound-sub">${title ? `We couldn't find a title matching "${title}".` : "No movie was specified."} Take a look at what's playing instead.</p>
+        <a href="Rerng.html#movies" class="btn btn-primary">Browse Movies</a>
+      </div>`;
+  }
+
+  /* ==================== DETAIL VIEW ==================== */
+  function renderDetail(m){
+    const upcoming = isUpcoming(m);
+
+    main.innerHTML = `
+      <div class="mv-page">
+        <a href="Rerng.html#movies" class="mv-detail-back">${backArrowSvg()} All Movies</a>
+
+        <div class="mv-hero">
+          <div class="mv-poster-wrap">
+            <img src="${m.poster}" alt="${m.title} poster">
+          </div>
+          <div class="mv-info">
+            <div class="mv-badges">
+              <span class="mv-age-badge">${m.age}</span>
+              ${m.rating ? `<span class="mv-rating-badge">${starSvg()}${m.rating}</span>` : ''}
+              ${upcoming ? `<span class="mv-soon-badge">Releases ${m.upcoming}</span>` : ''}
+            </div>
+            <h1 class="mv-title serif">${m.title}</h1>
+            <div class="mv-meta-row">
+              <span>${m.genre}</span>
+              <span>${m.dur}</span>
+              <span>${m.lang}</span>
+            </div>
+            <p class="mv-synopsis">${m.synopsis || ''}</p>
+            <div class="mv-hero-actions">
+              <button class="btn btn-primary" id="mvBookBtn">${upcoming ? 'Book Advance Tickets' : 'Book Tickets'}</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mv-facts">
+          <div class="mv-fact"><div class="mv-fact-label">Genre</div><div class="mv-fact-val">${m.genre}</div></div>
+          <div class="mv-fact"><div class="mv-fact-label">Duration</div><div class="mv-fact-val">${m.dur}</div></div>
+          <div class="mv-fact"><div class="mv-fact-label">Language</div><div class="mv-fact-val">${m.lang}</div></div>
+          <div class="mv-fact"><div class="mv-fact-label">Rating</div><div class="mv-fact-val">${m.age}</div></div>
+        </div>
+
+        <div class="mv-cinemas-head">
+          <span class="section-eyebrow">${upcoming ? 'Advance Booking' : 'Book Now'}</span>
+          <h2 class="section-title serif">Available At</h2>
+        </div>
+        <div class="mv-cinema-list" id="mvCinemaList"></div>
+
+        <div class="mv-related-head">
+          <span class="section-eyebrow">Keep Exploring</span>
+          <h2 class="section-title serif">You Might Also Like</h2>
+        </div>
+        <div class="movie-grid" id="mvRelatedGrid"></div>
+      </div>`;
+
+    document.getElementById('mvBookBtn').addEventListener('click', () => {
+      localStorage.setItem('bk_movie', JSON.stringify(m));
+      window.location.href = 'booking.html';
+    });
+
+    const cinemaList = document.getElementById('mvCinemaList');
+    CINEMAS.forEach(c => {
+      const pill = document.createElement('a');
+      pill.href = 'booking.html?cinema=' + encodeURIComponent(c.name);
+      pill.className = 'mv-cinema-pill';
+      pill.innerHTML = `
+        <div>
+          <div class="mv-cinema-pill-name">${c.name}</div>
+          <div class="mv-cinema-pill-city">${c.city}</div>
+        </div>
+        ${arrowRightSvg()}`;
+      pill.addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.setItem('bk_movie', JSON.stringify(m));
+        window.location.href = pill.href;
+      });
+      cinemaList.appendChild(pill);
+    });
+
+    renderRelated(m);
+  }
+
+  function renderRelated(current){
+    const grid = document.getElementById('mvRelatedGrid');
+    const pool = isUpcoming(current) ? MOVIES.soon : MOVIES.showing;
+    const related = pool.filter(m => m.title !== current.title).slice(0, 4);
+
+    if(!related.length){
+      grid.parentElement.style.display = 'none';
+      return;
+    }
+
+    related.forEach((m,i) => {
+      const card = document.createElement('div');
+      card.className = 'movie-card fade-up';
+      card.style.animationDelay = (i*0.05)+'s';
+      card.innerHTML = `
+        <div class="movie-poster-wrap">
+          <img src="${m.poster}" alt="${m.title} poster" loading="lazy">
+          <span class="age-badge">${m.age}</span>
+          ${m.rating ? `<span class="rating-badge">${starSvg()}${m.rating}</span>` : `<span class="rating-badge" style="color:#A1A1AA">${m.upcoming}</span>`}
+          <div class="overlay">
+            <button class="quick-btn details">View Details</button>
+            <button class="quick-btn book">Book Now</button>
+          </div>
+        </div>
+        <div class="movie-info">
+          <div class="movie-title">${m.title}</div>
+          <div class="movie-meta">
+            <span>${m.genre}</span>
+            <span>${m.dur}</span>
+            <span>${m.lang}</span>
+          </div>
+        </div>`;
+      card.querySelector('.details').addEventListener('click', (e) => {
+        e.stopPropagation();
+        window.location.href = 'movie.html?title=' + encodeURIComponent(m.title);
+      });
+      card.querySelector('.book').addEventListener('click', (e) => {
+        e.stopPropagation();
+        localStorage.setItem('bk_movie', JSON.stringify(m));
+        window.location.href = 'booking.html';
+      });
+      grid.appendChild(card);
+    });
+  }
+})();
+</script>
+</body>
+</html>

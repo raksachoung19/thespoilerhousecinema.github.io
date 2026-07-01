@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — The Spoiler House</title>
+  <meta name="description" content="Get in touch with The Spoiler House Cinema — phone, email, and location details for all Phnom Penh cinemas.">
+  <link rel="stylesheet" href="Style.css">
+  <link rel="stylesheet" href="booking.css">
+  <link rel="stylesheet" href="about.css">
+  <link rel="stylesheet" href="contact.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="booking-body">
+
+
+<header class="bk-topbar">
+  <a href="index.html" class="bk-back" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"/></svg>
+  </a>
+  <a href="index.html" class="bk-logo serif">The Spoiler House</a>
+  <div class="bk-topbar-spacer"></div>
+  <div class="lang-switch" id="langSwitch">
+    <button class="active" data-lang="en">EN</button>
+    <button data-lang="kh">KH</button>
+  </div>
+  <nav class="bk-topbar-nav" aria-label="Secondary">
+    <a href="index.html">Home</a>
+    <a href="cinema.html">Cinemas</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" aria-current="page">Contact</a>
+  </nav>
+</header>
+
+<main id="main-content" class="ct-page">
+
+  <!-- ===== HERO ===== -->
+  <section class="ct-hero" aria-labelledby="ct-hero-title">
+    <span class="section-eyebrow">We'd Love To Hear From You</span>
+    <h1 id="ct-hero-title" class="ct-hero-title serif">Get in touch</h1>
+    <p class="ct-hero-sub">Questions about a booking, feedback on a visit, or a partnership idea — reach us however works best for you.</p>
+  </section>
+
+  <!-- ===== QUICK CONTACT METHODS ===== -->
+  <section class="ct-section" aria-labelledby="ct-methods-heading">
+    <h2 id="ct-methods-heading" class="visually-hidden">Quick contact methods</h2>
+    <ul class="ct-methods">
+      <li class="ct-method">
+        <div class="ct-method-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3>Call Us</h3>
+        <a href="tel:+855239001000">+855 23 900 100</a>
+        <p>Daily, 9:00 AM – 9:00 PM</p>
+      </li>
+      <li class="ct-method">
+        <div class="ct-method-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg>
+        </div>
+        <h3>Email Us</h3>
+        <a href="mailto:hello@thespoilerhouse.com.kh">hello@thespoilerhouse.com.kh</a>
+        <p>We reply within one business day</p>
+      </li>
+      <li class="ct-method">
+        <div class="ct-method-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3>Visit Us</h3>
+        <a href="cinema.html">See all 3 locations</a>
+        <p>AEON Mall Sen Sok · Olympia Mall · Chip Mong Tower</p>
+      </li>
+    </ul>
+  </section>
+
+  <div class="ct-layout">
+
+    <!-- ===== CONTACT FORM ===== -->
+    <section class="ct-section" aria-labelledby="ct-form-heading" style="margin-bottom:0;">
+      <div class="ct-section-head">
+        <span class="section-eyebrow">Send a Message</span>
+        <h2 id="ct-form-heading" class="section-title serif">Write to our team</h2>
+      </div>
+
+      <div class="ct-form-card">
+        <div class="ct-form-status" id="ctFormStatus" role="status" aria-live="polite"></div>
+
+        <form class="ct-form" id="ctForm" novalidate>
+          <div class="ct-field">
+            <label class="ct-label" for="ctName">Full name <span class="ct-required" aria-hidden="true">*</span></label>
+            <input class="ct-input" type="text" id="ctName" name="ctName"
+                   placeholder="Your name" autocomplete="name"
+                   aria-required="true" aria-describedby="ctNameError">
+            <span class="ct-error-msg" id="ctNameError" role="alert">Please enter your name.</span>
+          </div>
+
+          <div class="ct-field">
+            <label class="ct-label" for="ctEmail">Email address <span class="ct-required" aria-hidden="true">*</span></label>
+            <input class="ct-input" type="email" id="ctEmail" name="ctEmail"
+                   placeholder="you@example.com" autocomplete="email" inputmode="email"
+                   aria-required="true" aria-describedby="ctEmailError">
+            <span class="ct-error-msg" id="ctEmailError" role="alert">Please enter a valid email address.</span>
+          </div>
+
+          <div class="ct-field">
+            <label class="ct-label" for="ctPhone">Phone number <span aria-hidden="true">(optional)</span></label>
+            <input class="ct-input" type="tel" id="ctPhone" name="ctPhone"
+                   placeholder="+855 ..." autocomplete="tel" inputmode="tel">
+          </div>
+
+          <div class="ct-field">
+            <label class="ct-label" for="ctReason">Reason for contact <span class="ct-required" aria-hidden="true">*</span></label>
+            <select class="ct-select" id="ctReason" name="ctReason" aria-required="true" aria-describedby="ctReasonError">
+              <option value="">Select a topic…</option>
+              <option value="booking">Booking support</option>
+              <option value="feedback">Feedback about a visit</option>
+              <option value="partnership">Partnership or press</option>
+              <option value="careers">Careers</option>
+              <option value="other">Something else</option>
+            </select>
+            <span class="ct-error-msg" id="ctReasonError" role="alert">Please choose a reason for contact.</span>
+          </div>
+
+          <div class="ct-field">
+            <label class="ct-label" for="ctMessage">Message <span class="ct-required" aria-hidden="true">*</span></label>
+            <textarea class="ct-textarea" id="ctMessage" name="ctMessage"
+                      placeholder="How can we help?"
+                      aria-required="true" aria-describedby="ctMessageHint ctMessageError"></textarea>
+            <span class="ct-hint" id="ctMessageHint">Minimum 10 characters.</span>
+            <span class="ct-error-msg" id="ctMessageError" role="alert">Please enter a message of at least 10 characters.</span>
+          </div>
+
+          <button type="submit" class="btn btn-primary ct-submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== LOCATIONS ===== -->
+    <section class="ct-section" aria-labelledby="ct-locations-heading" style="margin-bottom:0;">
+      <div class="ct-section-head">
+        <span class="section-eyebrow">Find Us</span>
+        <h2 id="ct-locations-heading" class="section-title serif">Our locations</h2>
+      </div>
+
+      <div class="ct-locations">
+        <div class="ct-location-card">
+          <div class="ct-location-name">Spoiler House — AEON Mall Sen Sok</div>
+          <address>3rd Floor, AEON Mall Sen Sok, Phnom Penh</address>
+          <p>Open 10:00 AM – 12:00 AM, daily</p>
+          <div class="ct-location-links">
+            <a href="tel:+85523900111">Call +855 23 900 111</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Spoiler%20House%20AEON%20Mall%20Sen%20Sok%2C%20Phnom%20Penh" target="_blank" rel="noopener">Get directions</a>
+          </div>
+        </div>
+
+        <div class="ct-location-card">
+          <div class="ct-location-name">Spoiler House — Olympia Mall</div>
+          <address>5th Floor, Olympia Mall, Phnom Penh</address>
+          <p>Open 10:00 AM – 12:00 AM, daily</p>
+          <div class="ct-location-links">
+            <a href="tel:+85523900222">Call +855 23 900 222</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Spoiler%20House%20Olympia%20Mall%2C%20Phnom%20Penh" target="_blank" rel="noopener">Get directions</a>
+          </div>
+        </div>
+
+        <div class="ct-location-card">
+          <div class="ct-location-name">Spoiler House — Chip Mong Tower</div>
+          <address>Rooftop Level, Chip Mong Tower 338, Phnom Penh</address>
+          <p>Open 10:00 AM – 1:00 AM, daily</p>
+          <div class="ct-location-links">
+            <a href="tel:+85523900333">Call +855 23 900 333</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Chip%20Mong%20Tower%20338%2C%20Phnom%20Penh" target="_blank" rel="noopener">Get directions</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ct-section-head" style="margin-top:32px;margin-bottom:14px;">
+        <span class="section-eyebrow">Stay Connected</span>
+        <h2 class="section-title serif" style="font-size:20px;">Follow along</h2>
+      </div>
+      <nav class="ct-social-row social-row" aria-label="The Spoiler House on social media">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.5.3v2.7h-1.4c-1.4 0-1.7.6-1.7 1.6V12h2.9l-.5 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M21.5 3.5L2.7 11c-.9.4-.9 1.6.1 1.9l4.6 1.4 1.8 5.6c.3.9 1.4 1.1 2 .4l2.5-2.7 4.7 3.5c.8.6 1.9.1 2.1-.8l3-15.1c.2-1-.8-1.7-1.7-1.3z"/></svg></a>
+      </nav>
+    </section>
+
+  </div>
+
+  <!-- ===== FAQ ===== -->
+  <section class="ct-section" aria-labelledby="ct-faq-heading" style="margin-top:56px;">
+    <div class="ct-section-head">
+      <span class="section-eyebrow">Before You Ask</span>
+      <h2 id="ct-faq-heading" class="section-title serif">Frequently asked questions</h2>
+    </div>
+
+    <div class="ct-faq-list">
+      <details class="ct-faq-item">
+        <summary>
+          How do I get a refund on a booking?
+          <svg class="ct-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="ct-faq-answer">Contact us by phone or email with your booking code at least 2 hours before showtime, and our team will help process a refund or exchange.</p>
+      </details>
+
+      <details class="ct-faq-item">
+        <summary>
+          Do your cinemas have wheelchair access?
+          <svg class="ct-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="ct-faq-answer">Yes — all three locations are wheelchair accessible. If you need a specific seating arrangement, mention it when you contact us and we'll have it ready.</p>
+      </details>
+
+      <details class="ct-faq-item">
+        <summary>
+          Can I order food ahead of my showtime?
+          <svg class="ct-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="ct-faq-answer">Yes, use the Food &amp; Drinks step during checkout, or order separately from our <a href="food_drink.html">Concessions page</a> once you have a booking.</p>
+      </details>
+
+      <details class="ct-faq-item">
+        <summary>
+          How do I switch the site to Khmer?
+          <svg class="ct-faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <p class="ct-faq-answer">Use the EN / KH toggle in the top navigation on the homepage. Your language choice is remembered on this device.</p>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  const STORAGE_KEY = 'sh_contact_messages';
+  const form = document.getElementById('ctForm');
+  const status = document.getElementById('ctFormStatus');
+
+  const fields = {
+    ctName:    { el: document.getElementById('ctName'),    errorId: 'ctNameError' },
+    ctEmail:   { el: document.getElementById('ctEmail'),   errorId: 'ctEmailError' },
+    ctReason:  { el: document.getElementById('ctReason'),  errorId: 'ctReasonError' },
+    ctMessage: { el: document.getElementById('ctMessage'), errorId: 'ctMessageError' }
+  };
+
+  function setInvalid(key, invalid){
+    const { el, errorId } = fields[key];
+    const errorEl = document.getElementById(errorId);
+    el.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+    errorEl.classList.toggle('show', invalid);
+  }
+
+  function isValidEmail(v){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+
+  function showStatus(kind, message){
+    status.textContent = message;
+    status.className = 'ct-form-status show ' + kind;
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    status.className = 'ct-form-status';
+    status.textContent = '';
+
+    const name = fields.ctName.el.value.trim();
+    const email = fields.ctEmail.el.value.trim();
+    const reason = fields.ctReason.el.value;
+    const message = fields.ctMessage.el.value.trim();
+
+    let firstInvalidEl = null;
+    let hasError = false;
+
+    const nameInvalid = !name;
+    setInvalid('ctName', nameInvalid);
+    if(nameInvalid){ hasError = true; firstInvalidEl = firstInvalidEl || fields.ctName.el; }
+
+    const emailInvalid = !isValidEmail(email);
+    setInvalid('ctEmail', emailInvalid);
+    if(emailInvalid){ hasError = true; firstInvalidEl = firstInvalidEl || fields.ctEmail.el; }
+
+    const reasonInvalid = !reason;
+    setInvalid('ctReason', reasonInvalid);
+    if(reasonInvalid){ hasError = true; firstInvalidEl = firstInvalidEl || fields.ctReason.el; }
+
+    const messageInvalid = message.length < 10;
+    setInvalid('ctMessage', messageInvalid);
+    if(messageInvalid){ hasError = true; firstInvalidEl = firstInvalidEl || fields.ctMessage.el; }
+
+    if(hasError){
+      showStatus('error', 'Please fix the highlighted fields before sending.');
+      if(firstInvalidEl) firstInvalidEl.focus();
+      return;
+    }
+
+    const entry = {
+      name, email, reason, message,
+      phone: document.getElementById('ctPhone').value.trim(),
+      submittedAt: new Date().toISOString()
+    };
+
+    let saved = [];
+    try{ saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }catch(err){ saved = []; }
+    saved.push(entry);
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(saved)); }catch(err){}
+
+    showStatus('success', '✓ Message sent! We\'ll get back to you at ' + email + ' soon.');
+    form.reset();
+    Object.keys(fields).forEach(key => setInvalid(key, false));
+  });
+})();
+</script>
+</body>
+</html>

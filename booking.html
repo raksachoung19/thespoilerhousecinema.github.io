@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Tickets — The Spoiler House</title>
+<link rel="stylesheet" href="Style.css">
+<link rel="stylesheet" href="booking.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="booking-body">
+
+<!-- ===== BOOKING TOPBAR ===== -->
+<header class="bk-topbar">
+  <a href="index.html" class="bk-back" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </a>
+  <a href="index.html" class="bk-logo serif">The Spoiler House</a>
+  <div class="bk-topbar-spacer"></div>
+  <div class="lang-switch" id="langSwitch">
+    <button class="active" data-lang="en">EN</button>
+    <button data-lang="kh">KH</button>
+  </div>
+</header>
+<main id="bk-main"></main>
+
+<!-- ===== STEP PROGRESS ===== -->
+<div class="bk-steps" id="bkSteps">
+  <div class="bk-step active" data-step="1"><span class="bk-step-num">1</span><span class="bk-step-label">Showtime</span></div>
+  <div class="bk-step-line"></div>
+  <div class="bk-step" data-step="2"><span class="bk-step-num">2</span><span class="bk-step-label">Seats</span></div>
+  <div class="bk-step-line"></div>
+  <div class="bk-step" data-step="3"><span class="bk-step-num">3</span><span class="bk-step-label">Food &amp; Drinks</span></div>
+  <div class="bk-step-line"></div>
+  <div class="bk-step" data-step="4"><span class="bk-step-num">4</span><span class="bk-step-label">Checkout</span></div>
+  <div class="bk-step-line"></div>
+  <div class="bk-step" data-step="5"><span class="bk-step-num">5</span><span class="bk-step-label">Confirmed</span></div>
+</div>
+
+<main class="bk-main">
+  <div class="bk-layout">
+
+    <!-- ===== LEFT: STEP PANELS ===== -->
+    <div class="bk-panels">
+
+      <!-- ---- STEP 1: SHOWTIME ---- -->
+      <section class="bk-panel active" id="panel-1">
+        <h2 class="bk-panel-title serif">Pick a date &amp; showtime</h2>
+        <p class="bk-panel-sub">Choose a cinema, a date, and a session that works for you.</p>
+
+        <div class="bk-field-label">Cinema</div>
+        <div class="bk-cinema-list" id="cinemaList"></div>
+
+        <div class="bk-field-label" style="margin-top:28px;">Date</div>
+        <div class="bk-date-scroll" id="bkDateScroll"></div>
+
+        <div class="bk-field-label" style="margin-top:28px;">Showtime</div>
+        <div class="bk-showtime-grid" id="showtimeGrid"></div>
+        <p class="bk-showtime-note" id="showtimeNote" style="display:none;"></p>
+      </section>
+
+      <!-- ---- STEP 2: SEATS ---- -->
+      <section class="bk-panel" id="panel-2">
+        <h2 class="bk-panel-title serif">Choose your seats</h2>
+        <p class="bk-panel-sub">Tap a seat to select. Tap again to release it.</p>
+
+        <div class="bk-screen-wrap">
+          <div class="bk-screen"></div>
+          <span class="bk-screen-label">SCREEN</span>
+        </div>
+
+        <div class="bk-seatmap" id="seatMap"></div>
+
+        <div class="bk-seat-legend">
+          <span><i class="bk-dot avail"></i> Available</span>
+          <span><i class="bk-dot selected"></i> Selected</span>
+          <span><i class="bk-dot taken"></i> Taken</span>
+          <span><i class="bk-dot couple"></i> Couple</span>
+        </div>
+      </section>
+
+      <!-- ---- STEP 3: FOOD & DRINKS ---- -->
+      <section class="bk-panel" id="panel-3">
+        <h2 class="bk-panel-title serif">Add food &amp; drinks</h2>
+        <p class="bk-panel-sub">Skip straight to the seat, popcorn already waiting — or skip this step entirely.</p>
+
+        <div class="bk-fnb-grid" id="fnbGrid"></div>
+      </section>
+
+      <!-- ---- STEP 4: CHECKOUT ---- -->
+      <section class="bk-panel" id="panel-4">
+        <h2 class="bk-panel-title serif">Checkout</h2>
+        <p class="bk-panel-sub">Confirm your details and pay securely.</p>
+
+        <div class="bk-field-label">Contact details</div>
+        <div class="bk-form-grid">
+          <input type="text" placeholder="Full name" id="ckName">
+          <input type="tel" placeholder="Phone number" id="ckPhone">
+          <input type="email" placeholder="Email address" id="ckEmail" style="grid-column:1/-1;">
+        </div>
+
+        <div class="bk-field-label" style="margin-top:24px;">Payment method</div>
+        <div class="bk-pay-grid" id="payGrid"></div>
+      </section>
+
+      <!-- ---- STEP 5: CONFIRMATION ---- -->
+      <section class="bk-panel" id="panel-5">
+        <div class="bk-confirm-wrap">
+          <div class="bk-confirm-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h2 class="bk-panel-title serif" style="text-align:center;">Booking confirmed</h2>
+          <p class="bk-panel-sub" style="text-align:center;">Your e-ticket has been sent to your email. Show the QR code at the cinema entrance.</p>
+
+          <div class="bk-ticket" id="bkTicket"></div>
+
+          <div class="bk-confirm-actions">
+            <button class="btn btn-ghost" id="btnDownload">Download Ticket</button>
+            <a href="index.html" class="btn btn-primary">Back to Home</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ===== RIGHT: SUMMARY SIDEBAR ===== -->
+    <aside class="bk-summary" id="bkSummary">
+      <div class="bk-summary-movie" id="summaryMovie"></div>
+
+      <div class="bk-summary-row" id="summaryShowtime" style="display:none;">
+        <span class="bk-summary-label">Showtime</span>
+        <span class="bk-summary-val" id="summaryShowtimeVal">—</span>
+      </div>
+
+      <div class="bk-summary-row" id="summarySeatsRow" style="display:none;">
+        <span class="bk-summary-label">Seats</span>
+        <span class="bk-summary-val" id="summarySeatsVal">—</span>
+      </div>
+
+      <div class="bk-summary-fnb" id="summaryFnb"></div>
+
+      <div class="bk-summary-divider"></div>
+
+      <div class="bk-summary-totalrow">
+        <span>Total</span>
+        <span id="summaryTotal">$0.00</span>
+      </div>
+
+      <button class="btn btn-primary bk-cta" id="bkNextBtn">Select a showtime</button>
+      <button class="bk-back-link" id="bkBackBtn" style="display:none;">← Back</button>
+    </aside>
+
+  </div>
+</main>
+
+<script>
+/* ================= STATE ================= */
+const params = new URLSearchParams(location.search);
+const movie = JSON.parse(localStorage.getItem('bk_movie') || 'null') || {
+  title: params.get('title') || 'Untitled Movie',
+  genre: params.get('genre') || '',
+  dur: params.get('dur') || '',
+  age: params.get('age') || '',
+  lang: params.get('lang') || '',
+  poster: params.get('poster') || ''
+};
+
+const state = {
+  step: 1,
+  cinema: null,
+  date: null,
+  selectedDate: null,
+  showtime: null,
+  seats: [],
+  fnb: {},
+  payment: null
+};
+
+const SEAT_PRICE = 5.5;
+const COUPLE_PRICE = 11;
+
+/* Resolve the earliest date this movie can actually be booked for.
+   - Already-showing movies (no `upcoming` field): today.
+   - Coming Soon movies: their release date (parsed from e.g. "Jul 17"),
+     rolled into next year if that date has already passed this year. */
+function resolveStartDate(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  if(!movie.upcoming) return today;
+
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const parts = movie.upcoming.trim().split(/\s+/);
+  const mi = MONTHS.indexOf(parts[0]);
+  const day = parseInt(parts[1], 10);
+  if(mi === -1 || isNaN(day)) return today; // malformed, fall back safely
+
+  let release = new Date(today.getFullYear(), mi, day);
+  if(release < today) release = new Date(today.getFullYear()+1, mi, day);
+  return release;
+}
+
+const startDate = resolveStartDate();
+const isComingSoon = !!movie.upcoming;
+
+const CINEMAS = [
+  {name:'Spoiler House — AEON Mall Sen Sok', city:'Phnom Penh'},
+  {name:'Spoiler House — Olympia Mall', city:'Phnom Penh'},
+  {name:'Spoiler House — Chip Mong Tower', city:'Phnom Penh'}
+];
+
+const SHOWTIMES = ['10:30 AM','12:45 PM','2:30 PM','4:15 PM','7:00 PM','9:30 PM','11:45 PM'];
+
+const FNB = [
+  {id:'pc1', name:'Classic Popcorn (M)', price:3.5, img:'🍿'},
+  {id:'pc2', name:'Caramel Popcorn (L)', price:4.75, img:'🍿'},
+  {id:'cola', name:'Coca-Cola (L)', price:2.25, img:'🥤'},
+  {id:'combo', name:'Combo: Popcorn + 2 Drinks', price:7.9, img:'🍿🥤'},
+  {id:'nachos', name:'Nachos &amp; Cheese', price:4.25, img:'🌽'},
+  {id:'hotdog', name:'Cheese Hotdog', price:3.75, img:'🌭'}
+];
+
+const PAYMENTS = [
+  {id:'aba', name:'ABA PAY', icon:'🅰️'},
+  {id:'wing', name:'Wing', icon:'Ⓦ'},
+  {id:'visa', name:'VISA / Mastercard', icon:'💳'}
+];
+
+/* ================= INIT MOVIE SUMMARY ================= */
+function renderMovieSummary(){
+  const el = document.getElementById('summaryMovie');
+  el.innerHTML = `
+    <img src="${movie.poster}" alt="${movie.title} poster" class="bk-summary-poster">
+    <div class="bk-summary-movie-info">
+      <div class="bk-summary-movie-title serif">${movie.title}</div>
+      <div class="bk-summary-movie-meta">${[movie.genre, movie.dur, movie.lang].filter(Boolean).join(' • ')}</div>
+      ${movie.age ? `<span class="bk-age-pill">${movie.age}</span>` : ''}
+      ${isComingSoon ? `<span class="bk-age-pill bk-soon-pill">Releases ${movie.upcoming}</span>` : ''}
+    </div>`;
+}
+renderMovieSummary();
+
+/* ================= STEP 1: CINEMA / DATE / SHOWTIME ================= */
+function renderCinemas(){
+  const wrap = document.getElementById('cinemaList');
+  wrap.innerHTML = '';
+  const requestedCinema = params.get('cinema');
+  const preselectIndex = requestedCinema
+    ? CINEMAS.findIndex(c => c.name === requestedCinema)
+    : -1;
+  const activeIndex = preselectIndex >= 0 ? preselectIndex : 0;
+
+  CINEMAS.forEach((c, i) => {
+    const card = document.createElement('button');
+    card.className = 'bk-cinema-card' + (i===activeIndex ? ' active':'');
+    card.innerHTML = `<span class="bk-cinema-name">${c.name}</span><span class="bk-cinema-city">${c.city}</span>`;
+    card.addEventListener('click', () => {
+      wrap.querySelectorAll('.bk-cinema-card').forEach(x=>x.classList.remove('active'));
+      card.classList.add('active');
+      state.cinema = c.name;
+      updateNextButton();
+    });
+    wrap.appendChild(card);
+  });
+  state.cinema = CINEMAS[activeIndex].name;
+}
+
+function formatDateLabel(d, today){
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const isToday = d.getTime() === today.getTime();
+  return `${isToday?'Today':days[d.getDay()]} ${d.getDate()} ${d.toLocaleString('en',{month:'short'})}`;
+}
+
+function renderDates(){
+  const wrap = document.getElementById('bkDateScroll');
+  wrap.innerHTML = '';
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const today = new Date(); today.setHours(0,0,0,0);
+  const base = new Date(startDate); // today for now-showing, release date for coming soon
+
+  function selectDate(d, pill){
+    wrap.querySelectorAll('.date-pill').forEach(p=>p.classList.remove('active'));
+    pill.classList.add('active');
+    state.selectedDate = d;
+    state.date = formatDateLabel(d, today);
+    state.showtime = null; // changing date invalidates a previously chosen showtime
+    renderShowtimes();
+    updateNextButton();
+  }
+
+  let firstPill = null;
+  for(let i=0;i<7;i++){
+    const d = new Date(base); d.setDate(base.getDate()+i);
+    const isToday = d.getTime() === today.getTime();
+    const pill = document.createElement('button');
+    pill.className = 'date-pill' + (i===0 ? ' active':'');
+    pill.innerHTML = `<span class="dow">${isToday?'Today':days[d.getDay()]}</span><span class="dnum">${d.getDate()}</span><span class="dow">${d.toLocaleString('en',{month:'short'})}</span>`;
+    pill.addEventListener('click', () => selectDate(d, pill));
+    if(i===0) firstPill = {d, pill};
+    wrap.appendChild(pill);
+  }
+
+  state.selectedDate = firstPill.d;
+  state.date = formatDateLabel(firstPill.d, today);
+}
+
+function renderShowtimes(){
+  const wrap = document.getElementById('showtimeGrid');
+  wrap.innerHTML = '';
+
+  const now = new Date();
+  const today = new Date(); today.setHours(0,0,0,0);
+  const selected = state.selectedDate || startDate;
+  const isSelectedToday = selected.getTime() === today.getTime();
+
+  SHOWTIMES.forEach((t, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'bk-time-pill';
+    btn.textContent = t;
+
+    const soldOut = i === 2;
+    const showtimeDate = new Date(`${selected.toDateString()} ${t}`);
+    const isPast = isSelectedToday && showtimeDate <= now;
+
+    if(soldOut || isPast){
+      btn.classList.add('disabled');
+      btn.disabled = true;
+      if(isPast && !soldOut) btn.title = 'This showtime has already started today';
+    }
+    btn.addEventListener('click', () => {
+      wrap.querySelectorAll('.bk-time-pill').forEach(x=>x.classList.remove('active'));
+      btn.classList.add('active');
+      state.showtime = t;
+      updateNextButton();
+    });
+    wrap.appendChild(btn);
+  });
+
+  const note = document.getElementById('showtimeNote');
+  if(note){
+    if(isSelectedToday){
+      note.textContent = 'Showtimes earlier than the current time are no longer bookable today.';
+      note.style.display = 'block';
+    } else {
+      note.style.display = 'none';
+    }
+  }
+}
+
+function checkStep1(){
+  return !!(state.cinema && state.date && state.showtime);
+}
+
+/* ================= STEP 2: SEATS ================= */
+const ROWS = ['A','B','C','D','E','F','G'];
+const SEATS_PER_ROW = 12;
+const TAKEN = new Set(['A3','A4','C5','C6','D8','E1','E2','F10','G6','G7']);
+const COUPLE_ROW = 'G';
+
+function renderSeatMap(){
+  const wrap = document.getElementById('seatMap');
+  wrap.innerHTML = '';
+  ROWS.forEach(row => {
+    const rowEl = document.createElement('div');
+    rowEl.className = 'bk-seat-row';
+    const label = document.createElement('span');
+    label.className = 'bk-row-label';
+    label.textContent = row;
+    rowEl.appendChild(label);
+
+    const seatsWrap = document.createElement('div');
+    seatsWrap.className = 'bk-seats-wrap';
+
+    const isCouple = row === COUPLE_ROW;
+    const count = isCouple ? SEATS_PER_ROW/2 : SEATS_PER_ROW;
+
+    for(let i=1;i<=count;i++){
+      const seatId = isCouple ? `${row}${i*2-1}-${i*2}` : `${row}${i}`;
+      const btn = document.createElement('button');
+      btn.className = 'bk-seat' + (isCouple ? ' couple' : '');
+      btn.textContent = isCouple ? '♥' : i;
+      btn.dataset.seat = seatId;
+
+      const takenCheck = isCouple ? (TAKEN.has(`${row}${i*2-1}`) || TAKEN.has(`${row}${i*2}`)) : TAKEN.has(seatId);
+      if(takenCheck){
+        btn.classList.add('taken');
+        btn.disabled = true;
+      } else {
+        btn.addEventListener('click', () => toggleSeat(btn, seatId, isCouple));
+      }
+      seatsWrap.appendChild(btn);
+      if(!isCouple && i === 6){
+        const aisle = document.createElement('span');
+        aisle.className = 'bk-aisle';
+        seatsWrap.appendChild(aisle);
+      }
+    }
+    rowEl.appendChild(seatsWrap);
+    wrap.appendChild(rowEl);
+  });
+}
+
+function toggleSeat(btn, seatId, isCouple){
+  const idx = state.seats.findIndex(s => s.id === seatId);
+  if(idx > -1){
+    state.seats.splice(idx,1);
+    btn.classList.remove('selected');
+  } else {
+    state.seats.push({id: seatId, price: isCouple ? COUPLE_PRICE : SEAT_PRICE, couple: isCouple});
+    btn.classList.add('selected');
+  }
+  updateSummary();
+  updateNextButton();
+}
+
+/* ================= STEP 3: FOOD & DRINKS ================= */
+function renderFnb(){
+  const wrap = document.getElementById('fnbGrid');
+  wrap.innerHTML = '';
+  FNB.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'bk-fnb-card';
+    card.innerHTML = `
+      <div class="bk-fnb-emoji">${item.img}</div>
+      <div class="bk-fnb-info">
+        <div class="bk-fnb-name">${item.name}</div>
+        <div class="bk-fnb-price">$${item.price.toFixed(2)}</div>
+      </div>
+      <div class="bk-qty-stepper">
+        <button class="bk-qty-btn minus">−</button>
+        <span class="bk-qty-val">0</span>
+        <button class="bk-qty-btn plus">+</button>
+      </div>`;
+    const valEl = card.querySelector('.bk-qty-val');
+    card.querySelector('.plus').addEventListener('click', () => {
+      state.fnb[item.id] = (state.fnb[item.id]||0)+1;
+      valEl.textContent = state.fnb[item.id];
+      updateSummary();
+    });
+    card.querySelector('.minus').addEventListener('click', () => {
+      if(!state.fnb[item.id]) return;
+      state.fnb[item.id]--;
+      if(state.fnb[item.id] <= 0) delete state.fnb[item.id];
+      valEl.textContent = state.fnb[item.id] || 0;
+      updateSummary();
+    });
+    wrap.appendChild(card);
+  });
+}
+
+/* ================= STEP 4: PAYMENT ================= */
+function renderPayments(){
+  const wrap = document.getElementById('payGrid');
+  wrap.innerHTML = '';
+  PAYMENTS.forEach((p,i) => {
+    const card = document.createElement('button');
+    card.className = 'bk-pay-card';
+    card.innerHTML = `<span class="bk-pay-icon">${p.icon}</span><span>${p.name}</span>`;
+    card.addEventListener('click', () => {
+      wrap.querySelectorAll('.bk-pay-card').forEach(x=>x.classList.remove('active'));
+      card.classList.add('active');
+      state.payment = p.name;
+      updateNextButton();
+    });
+    wrap.appendChild(card);
+  });
+}
+
+/* ================= SUMMARY / TOTAL ================= */
+function calcTotal(){
+  const seatTotal = state.seats.reduce((sum,s)=>sum+s.price,0);
+  const fnbTotal = Object.entries(state.fnb).reduce((sum,[id,qty])=>{
+    const item = FNB.find(f=>f.id===id);
+    return sum + (item ? item.price*qty : 0);
+  },0);
+  return seatTotal + fnbTotal;
+}
+
+function updateSummary(){
+  document.getElementById('summaryTotal').textContent = '$' + calcTotal().toFixed(2);
+
+  if(state.showtime){
+    document.getElementById('summaryShowtime').style.display = 'flex';
+    document.getElementById('summaryShowtimeVal').textContent = `${state.date} · ${state.showtime}`;
+  }
+
+  if(state.seats.length){
+    document.getElementById('summarySeatsRow').style.display = 'flex';
+    document.getElementById('summarySeatsVal').textContent = state.seats.map(s=>s.id).join(', ');
+  } else {
+    document.getElementById('summarySeatsRow').style.display = 'none';
+  }
+
+  const fnbWrap = document.getElementById('summaryFnb');
+  fnbWrap.innerHTML = '';
+  Object.entries(state.fnb).forEach(([id,qty])=>{
+    if(qty<=0) return;
+    const item = FNB.find(f=>f.id===id);
+    if(!item) return;
+    const row = document.createElement('div');
+    row.className = 'bk-summary-row';
+    row.innerHTML = `<span class="bk-summary-label">${qty}× ${item.name}</span><span class="bk-summary-val">$${(item.price*qty).toFixed(2)}</span>`;
+    fnbWrap.appendChild(row);
+  });
+}
+
+/* ================= STEP NAVIGATION ================= */
+function updateNextButton(){
+  const btn = document.getElementById('bkNextBtn');
+  if(state.step === 1){
+    const ok = checkStep1();
+    btn.textContent = ok ? 'Continue to Seats' : 'Select a showtime';
+    btn.disabled = !ok;
+  } else if(state.step === 2){
+    btn.textContent = state.seats.length ? `Continue with ${state.seats.length} seat${state.seats.length>1?'s':''}` : 'Select at least 1 seat';
+    btn.disabled = !state.seats.length;
+  } else if(state.step === 3){
+    btn.textContent = 'Continue to Checkout';
+    btn.disabled = false;
+  } else if(state.step === 4){
+    btn.textContent = 'Confirm & Pay';
+    btn.disabled = !state.payment;
+  } else {
+    btn.style.display = 'none';
+  }
+}
+
+function goToStep(n){
+  document.querySelectorAll('.bk-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+n).classList.add('active');
+
+  document.querySelectorAll('.bk-step').forEach(s=>{
+    const sn = parseInt(s.dataset.step);
+    s.classList.remove('active','done');
+    if(sn < n) s.classList.add('done');
+    if(sn === n) s.classList.add('active');
+  });
+
+  state.step = n;
+  document.getElementById('bkBackBtn').style.display = n > 1 && n < 5 ? 'block' : 'none';
+  document.getElementById('bkNextBtn').style.display = n < 5 ? 'block' : 'none';
+  updateNextButton();
+  window.scrollTo({top:0, behavior:'smooth'});
+
+  if(n === 5) renderConfirmation();
+}
+
+document.getElementById('bkNextBtn').addEventListener('click', () => {
+  if(state.step === 1 && !checkStep1()) return;
+  if(state.step === 2 && !state.seats.length) return;
+  if(state.step === 4 && !state.payment) return;
+  goToStep(Math.min(state.step+1, 5));
+});
+
+document.getElementById('bkBackBtn').addEventListener('click', () => {
+  goToStep(Math.max(state.step-1, 1));
+});
+
+/* ================= CONFIRMATION ================= */
+let lastTicket = null;
+
+function renderConfirmation(){
+  const code = 'SH-' + Math.random().toString(36).slice(2,8).toUpperCase();
+
+  const fnbItems = Object.entries(state.fnb)
+    .filter(([id,qty]) => qty > 0)
+    .map(([id,qty]) => {
+      const item = FNB.find(f=>f.id===id);
+      return item ? { name:item.name, qty, price:item.price } : null;
+    })
+    .filter(Boolean);
+
+  lastTicket = {
+    code,
+    title: movie.title,
+    poster: movie.poster,
+    cinema: state.cinema,
+    date: state.date,
+    showtime: state.showtime,
+    seats: state.seats.map(s=>s.id).join(', '),
+    fnb: fnbItems,
+    total: calcTotal(),
+    bookedAt: new Date().toISOString()
+  };
+
+  const fnbHtml = fnbItems.length ? `
+    <div class="bk-ticket-divider"></div>
+    <div class="bk-ticket-fnb">
+      <div class="bk-ticket-fnb-label">Food &amp; Drinks</div>
+      ${fnbItems.map(f => `<div class="bk-ticket-fnb-row"><span>${f.qty}× ${f.name}</span><span>$${(f.price*f.qty).toFixed(2)}</span></div>`).join('')}
+    </div>` : '';
+
+  const ticket = document.getElementById('bkTicket');
+  ticket.innerHTML = `
+    <div class="bk-ticket-top">
+      <img src="${movie.poster}" class="bk-ticket-poster" alt="${movie.title}">
+      <div class="bk-ticket-info">
+        <div class="bk-ticket-title serif">${movie.title}</div>
+        <div class="bk-ticket-meta">${state.cinema}</div>
+        <div class="bk-ticket-meta">${state.date} · ${state.showtime}</div>
+        <div class="bk-ticket-meta">Seats: ${state.seats.map(s=>s.id).join(', ')}</div>
+      </div>
+    </div>
+    ${fnbHtml}
+    <div class="bk-ticket-divider"></div>
+    <div class="bk-ticket-bottom">
+      <div class="bk-ticket-code">${code}</div>
+      <div class="bk-ticket-qr">▦</div>
+    </div>`;
+
+  // Save to this browser's ticket history so "My Tickets" can show it
+  try{
+    const saved = JSON.parse(localStorage.getItem('sh_tickets') || '[]');
+    saved.push(lastTicket);
+    localStorage.setItem('sh_tickets', JSON.stringify(saved));
+  }catch(e){}
+}
+
+document.getElementById('btnDownload').addEventListener('click', () => {
+  if(!lastTicket) return;
+  const t = lastTicket;
+
+  const fnbRows = (t.fnb && t.fnb.length)
+    ? t.fnb.map(f => `<div class="meta">${f.qty}× ${f.name} — $${(f.price*f.qty).toFixed(2)}</div>`).join('')
+    : '';
+
+  const html = `<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<title>E-Ticket — ${t.code}</title>
+<style>
+  body{font-family:'Inter',Arial,sans-serif;background:#0A0A0A;color:#fff;margin:0;padding:40px;}
+  .ticket{max-width:420px;margin:0 auto;background:#141414;border:1px solid #27272A;border-radius:24px;padding:28px;}
+  .top{display:flex;gap:14px;}
+  .poster{width:72px;height:104px;border-radius:10px;object-fit:cover;flex-shrink:0;}
+  .title{font-size:19px;font-weight:700;margin-bottom:6px;}
+  .meta{font-size:13px;color:#A1A1AA;margin-top:3px;}
+  .divider{height:1px;background:#27272A;margin:20px 0;}
+  .fnb-label{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#71717A;margin-bottom:8px;}
+  .bottom{display:flex;align-items:center;justify-content:space-between;}
+  .code{font-size:17px;font-weight:700;letter-spacing:.05em;color:#E50914;}
+  .qr{font-size:46px;line-height:1;}
+  .brand{text-align:center;font-size:12px;color:#71717A;margin-top:24px;letter-spacing:.04em;}
+<\/style></head>
+<body>
+  <div class="ticket">
+    <div class="top">
+      <img class="poster" src="${t.poster}" alt="">
+      <div>
+        <div class="title">${t.title}</div>
+        <div class="meta">${t.cinema}</div>
+        <div class="meta">${t.date} · ${t.showtime}</div>
+        <div class="meta">Seats: ${t.seats}</div>
+      </div>
+    </div>
+    ${fnbRows ? `<div class="divider"></div><div class="fnb-label">Food &amp; Drinks</div>${fnbRows}` : ''}
+    <div class="divider"></div>
+    <div class="bottom">
+      <div class="code">${t.code}</div>
+      <div class="qr">▦</div>
+    </div>
+  </div>
+  <div class="brand">THE SPOILER HOUSE CINEMA — Show this at the entrance</div>
+<\/body><\/html>`;
+
+  const blob = new Blob([html], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `e-ticket-${t.code}.html`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+/* ================= BOOT ================= */
+renderCinemas();
+renderDates();
+renderShowtimes();
+renderSeatMap();
+renderFnb();
+renderPayments();
+updateSummary();
+updateNextButton();
+</script>
+</body>
+</html>

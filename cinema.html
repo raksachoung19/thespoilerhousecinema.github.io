@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Cinemas — The Spoiler House</title>
+  <link rel="stylesheet" href="Style.css">
+  <link rel="stylesheet" href="booking.css">
+  <link rel="stylesheet" href="cinema.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="booking-body">
+
+<header class="bk-topbar">
+  <a href="index.html" class="bk-back" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </a>
+  <a href="index.html" class="bk-logo serif">The Spoiler House</a>
+  <div class="bk-topbar-spacer"></div>
+  <div class="lang-switch" id="langSwitch">
+    <button class="active" data-lang="en">EN</button>
+    <button data-lang="kh">KH</button>
+  </div>
+</header>
+
+<main id="cinMain"></main>
+
+<script>
+(function(){
+  /* ==========================================================
+     CINEMA DATA — single source of truth for board + detail view
+     ========================================================== */
+  const CINEMAS = [
+    {
+      name:'Spoiler House — AEON Mall Sen Sok', city:'Phnom Penh',
+      address:'3rd Floor, AEON Mall Sen Sok, Phnom Penh',
+      phone:'+855 23 900 111',
+      hours:'10:00 AM – 12:00 AM, daily',
+      screens:8,
+      formats:['IMAX','Dolby Atmos','Standard'],
+      amenities:[
+        {icon:'🅿️',label:'Free Parking'},
+        {icon:'♿',label:'Wheelchair Accessible'},
+        {icon:'📶',label:'Free Wi-Fi'},
+        {icon:'🍿',label:'Concession Stand'},
+        {icon:'💳',label:'Cashless Payment'},
+        {icon:'🚻',label:'Family Restrooms'}
+      ]
+    },
+    {
+      name:'Spoiler House — Olympia Mall', city:'Phnom Penh',
+      address:'5th Floor, Olympia Mall, Phnom Penh',
+      phone:'+855 23 900 222',
+      hours:'10:00 AM – 12:00 AM, daily',
+      screens:6,
+      formats:['Dolby Atmos','Diamond Class','Standard'],
+      amenities:[
+        {icon:'🅿️',label:'Free Parking'},
+        {icon:'♿',label:'Wheelchair Accessible'},
+        {icon:'🍿',label:'Concession Stand'},
+        {icon:'💳',label:'Cashless Payment'},
+        {icon:'🛋️',label:'Diamond Class Lounge'},
+        {icon:'📶',label:'Free Wi-Fi'}
+      ]
+    },
+    {
+      name:'Spoiler House — Chip Mong Tower', city:'Phnom Penh',
+      address:'Rooftop Level, Chip Mong Tower 338, Phnom Penh',
+      phone:'+855 23 900 333',
+      hours:'10:00 AM – 1:00 AM, daily',
+      screens:5,
+      formats:['IMAX','Standard'],
+      amenities:[
+        {icon:'♿',label:'Wheelchair Accessible'},
+        {icon:'🍿',label:'Concession Stand'},
+        {icon:'💳',label:'Cashless Payment'},
+        {icon:'📶',label:'Free Wi-Fi'},
+        {icon:'🎧',label:'Assisted Listening'}
+      ]
+    }
+  ];
+
+  /* Same "Now Showing" catalog as the homepage, so this page can show
+     what's currently playing at the selected location. */
+  const MOVIES_SHOWING = [
+    {title:'Suzzanna: witchcraft', genre:'Action, Thriller', dur:'2h 15m', age:'R18', lang:'EN (Sub KH)', rating:8.6, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000218'},
+    {title:'Supergirl', genre:'Action, Adventure, Superhero', dur:'1h 48m', age:'NC15', lang:'EN (Sub KH)', rating:7.9, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000137'},
+    {title:'Combined Funerals', genre:'Horror', dur:'1h 19m', age:'G', lang:'EN (Sub KH)', rating:7.2, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000250'},
+    {title:'Shake rattle & Roll: Evil Origins', genre:'Horror', dur:'2h 25m', age:'NC15', lang:'EN (Sub KH)', rating:8.9, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000243'},
+    {title:'Where It Began', genre:'Horror', dur:'1h 55m', age:'NC15', lang:'KH Dub', rating:8.1, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000247'},
+    {title:'Death House', genre:'Crime, Thriller', dur:'1h 29m', age:'R18', lang:'Indo (Sub EN/KH)', rating:7.5, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000093'},
+    {title:'Toy Story: Reunion', genre:'Animation, Family', dur:'1h 42m', age:'All', lang:'EN (Sub KH)', rating:9.0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000136'},
+    {title:'Colony', genre:'Thriller, Action', dur:'2h 3m', age:'R18', lang:'KH', rating:8.3, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000185'}
+  ];
+
+  const main = document.getElementById('cinMain');
+  const params = new URLSearchParams(window.location.search);
+  const requestedName = params.get('name');
+  const cinema = requestedName ? CINEMAS.find(c => c.name === requestedName) : null;
+
+  if(cinema){
+    renderDetail(cinema);
+  } else if(requestedName){
+    renderNotFound(requestedName);
+  } else {
+    renderBoard();
+  }
+
+  function pinSvg(){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`;}
+  function phoneSvg(){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;}
+  function clockSvg(){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`;}
+  function filmSvg(){return `<svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9l6 3-6 3V9z" fill="currentColor"/></svg>`;}
+  function backArrowSvg(){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>`;}
+  function starSvg(){return `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.6 7.2.9-5.3 5 1.5 7.1L12 18l-6.5 3.6L7 14.5l-5.3-5 7.2-.9z"/></svg>`;}
+
+  /* ==================== BOARD VIEW (all cinemas) ==================== */
+  function renderBoard(){
+    main.innerHTML = `
+      <div class="cin-page">
+        <div class="cin-board-head">
+          <span class="section-eyebrow">Find Us</span>
+          <h1 class="section-title serif">Our Cinemas</h1>
+          <p class="section-sub">Pick a location to see showtimes, amenities, and what's playing.</p>
+        </div>
+
+        <div class="cinema-loc-grid">
+          ${CINEMAS.map(c => `
+            <a href="cinema.html?name=${encodeURIComponent(c.name)}" class="cinema-loc-card">
+              <div class="cinema-loc-icon">📍</div>
+              <div class="cinema-loc-info">
+                <div class="cinema-loc-name">${c.name}</div>
+                <div class="cinema-loc-city">${c.city}</div>
+              </div>
+              <svg class="cinema-loc-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </a>`).join('')}
+        </div>
+      </div>`;
+  }
+
+  /* ==================== NOT FOUND ==================== */
+  function renderNotFound(name){
+    main.innerHTML = `
+      <div class="cin-notfound">
+        <div class="cin-notfound-icon">📍</div>
+        <div class="cin-notfound-title serif">Cinema not found</div>
+        <p class="cin-notfound-sub">We couldn't find a location matching "${name}". Take a look at all our cinemas instead.</p>
+        <a href="cinema.html" class="btn btn-primary">View All Cinemas</a>
+      </div>`;
+  }
+
+  /* ==================== DETAIL VIEW ==================== */
+  function renderDetail(c){
+    const others = CINEMAS.filter(x => x.name !== c.name);
+    const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(c.name + ', ' + c.address);
+
+    main.innerHTML = `
+      <div class="cin-page">
+        <a href="cinema.html" class="cin-detail-back">${backArrowSvg()} All Cinemas</a>
+
+        <div class="cin-hero">
+          <div class="cin-hero-icon">${filmSvg()}</div>
+          <h1 class="cin-hero-name serif">${c.name}</h1>
+          <div class="cin-hero-city">${c.city} · ${c.screens} screens</div>
+          <div class="cin-hero-actions">
+            <a href="booking.html?cinema=${encodeURIComponent(c.name)}" class="btn btn-primary">Book Tickets</a>
+            <a href="${mapsUrl}" target="_blank" rel="noopener" class="btn btn-ghost">Get Directions</a>
+          </div>
+        </div>
+
+        <div class="cin-facts">
+          <div class="cin-fact">
+            <div class="cin-fact-icon">${pinSvg()}</div>
+            <div>
+              <div class="cin-fact-label">Address</div>
+              <div class="cin-fact-val">${c.address}</div>
+            </div>
+          </div>
+          <div class="cin-fact">
+            <div class="cin-fact-icon">${phoneSvg()}</div>
+            <div>
+              <div class="cin-fact-label">Phone</div>
+              <div class="cin-fact-val">${c.phone}</div>
+            </div>
+          </div>
+          <div class="cin-fact">
+            <div class="cin-fact-icon">${clockSvg()}</div>
+            <div>
+              <div class="cin-fact-label">Hours</div>
+              <div class="cin-fact-val">${c.hours}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cin-formats">
+          ${c.formats.map(f => `<span class="cin-format-pill">${f}</span>`).join('')}
+        </div>
+
+        <span class="section-eyebrow">Facilities</span>
+        <h2 class="section-title serif">Amenities</h2>
+        <div class="cin-amenities">
+          ${c.amenities.map(a => `<div class="cin-amenity"><span class="cin-amenity-icon">${a.icon}</span>${a.label}</div>`).join('')}
+        </div>
+
+        <div class="cin-showing-head">
+          <span class="section-eyebrow">This Week</span>
+          <h2 class="section-title serif">Now Showing Here</h2>
+        </div>
+        <div class="movie-grid" id="cinMovieGrid"></div>
+
+        ${others.length ? `
+        <div class="cin-switcher">
+          <div class="cin-switcher-label">Other Locations</div>
+          <div class="cin-switcher-list">
+            ${others.map(o => `
+              <a href="cinema.html?name=${encodeURIComponent(o.name)}" class="cin-switcher-pill">📍 ${o.name}</a>`).join('')}
+          </div>
+        </div>` : ''}
+      </div>`;
+
+    renderMovies(c.name);
+  }
+
+  function renderMovies(cinemaName){
+    const grid = document.getElementById('cinMovieGrid');
+    if(!grid) return;
+    grid.innerHTML = '';
+
+    MOVIES_SHOWING.forEach((m,i) => {
+      const card = document.createElement('div');
+      card.className = 'movie-card fade-up';
+      card.style.animationDelay = (i*0.05)+'s';
+      card.innerHTML = `
+        <div class="movie-poster-wrap">
+          <img src="${m.poster}" alt="${m.title} poster" loading="lazy">
+          <span class="age-badge">${m.age}</span>
+          <span class="rating-badge">${starSvg()}${m.rating}</span>
+          <div class="overlay">
+            <button class="quick-btn book">Book Now</button>
+          </div>
+        </div>
+        <div class="movie-info">
+          <div class="movie-title">${m.title}</div>
+          <div class="movie-meta">
+            <span>${m.genre}</span>
+            <span>${m.dur}</span>
+            <span>${m.lang}</span>
+          </div>
+        </div>`;
+      card.querySelector('.book').addEventListener('click', (e) => {
+        e.stopPropagation();
+        localStorage.setItem('bk_movie', JSON.stringify(m));
+        window.location.href = 'booking.html?cinema=' + encodeURIComponent(cinemaName);
+      });
+      grid.appendChild(card);
+    });
+  }
+})();
+</script>
+</body>
+</html>

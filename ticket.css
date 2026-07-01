@@ -1,0 +1,160 @@
+/* ============================================================
+   MY TICKETS — extends Style.css + booking.css tokens
+   ============================================================ */
+
+/* ===== EMPTY STATE ===== */
+.tix-empty-wrap{
+  max-width:440px;
+  margin:120px auto;
+  text-align:center;
+  padding:0 24px;
+}
+.tix-empty-icon{
+  width:84px;height:84px;border-radius:50%;
+  background:var(--card);
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 28px;
+  font-size:34px;
+  box-shadow:0 16px 40px -12px rgba(0,0,0,.5);
+}
+.tix-empty-title{font-size:25px;font-weight:600;margin-bottom:10px;}
+.tix-empty-sub{
+  font-size:14.5px;color:var(--text-secondary);
+  line-height:1.65;margin-bottom:30px;
+}
+.tix-empty-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+
+/* ===== PAGE SHELL ===== */
+.tix-page{
+  max-width:640px;
+  margin:0 auto;
+  padding:48px 24px 100px;
+}
+.tix-page-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:36px;
+  padding-bottom:22px;
+  border-bottom:1px solid var(--border);
+}
+.tix-page-title{
+  font-size:32px;
+  font-weight:600;
+  letter-spacing:-.01em;
+}
+.tix-page-sub{
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.03em;
+  color:var(--text-secondary);
+  white-space:nowrap;
+}
+
+/* ===== TICKET LIST ===== */
+.tix-list{display:flex;flex-direction:column;gap:24px;}
+
+/* ===== TICKET STUB (signature element) ===== */
+.tix-card{
+  position:relative;
+  animation:tixRise .5s var(--ease) both;
+}
+.tix-card:nth-child(2){animation-delay:.05s;}
+.tix-card:nth-child(3){animation-delay:.1s;}
+.tix-card:nth-child(n+4){animation-delay:.15s;}
+@keyframes tixRise{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+.tix-booked-at{
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--text-secondary);
+  margin-bottom:10px;
+  padding-left:4px;
+}
+
+/* Re-skin the shared .bk-ticket as a proper torn stub */
+.tix-card .bk-ticket{
+  margin-top:0;
+  position:relative;
+  padding:24px;
+  border-radius:20px;
+  background:linear-gradient(165deg, var(--card) 0%, #111113 100%);
+  box-shadow:0 20px 48px -16px rgba(0,0,0,.55);
+  transition:box-shadow .25s var(--ease), border-color .25s var(--ease);
+}
+.tix-card:hover .bk-ticket{
+  border-color:#3a3a3e;
+  box-shadow:0 24px 56px -14px rgba(229,9,20,.18), 0 20px 48px -16px rgba(0,0,0,.6);
+}
+
+/* Punched notches on left/right edges, level with the divider */
+.tix-card .bk-ticket::before,
+.tix-card .bk-ticket::after{
+  content:'';
+  position:absolute;
+  top:108px;
+  width:18px;height:18px;
+  border-radius:50%;
+  background:var(--bg);
+  border:1px solid var(--border);
+  z-index:2;
+}
+.tix-card .bk-ticket::before{left:-9px;}
+.tix-card .bk-ticket::after{right:-9px;}
+
+.tix-card .bk-ticket-top{gap:16px;}
+.tix-card .bk-ticket-poster{
+  width:68px;height:100px;
+  box-shadow:0 8px 20px -6px rgba(0,0,0,.5);
+}
+.tix-card .bk-ticket-title{font-size:18px;letter-spacing:-.005em;}
+.tix-card .bk-ticket-meta{font-size:13px;}
+.tix-card .bk-ticket-meta:first-of-type{
+  color:var(--primary);
+  font-weight:600;
+}
+
+/* Perforated divider, sitting right at the notch line */
+.tix-card .bk-ticket-divider{
+  position:relative;
+  margin:24px 0 18px;
+  background:none;
+  background-image:repeating-linear-gradient(to right, var(--border) 0 6px, transparent 6px 12px);
+  height:1px;
+}
+
+.tix-card .bk-ticket-code{
+  font-size:16px;
+  letter-spacing:.06em;
+}
+.tix-card .bk-ticket-qr{
+  color:var(--text-secondary);
+  transition:color .25s var(--ease);
+}
+.tix-card:hover .bk-ticket-qr{color:var(--primary);}
+
+/* ===== ACTIONS ===== */
+.tix-card-actions{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+  padding:0 2px;
+}
+.tix-card-actions .btn{
+  flex:1;
+  text-align:center;
+  font-size:13px;
+  padding:11px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:560px){
+  .tix-page{padding:32px 18px 80px;}
+  .tix-page-head{flex-direction:column;align-items:flex-start;gap:6px;}
+  .tix-page-title{font-size:26px;}
+  .tix-card .bk-ticket{padding:20px;}
+}

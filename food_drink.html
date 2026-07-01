@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Spoiler House — Food &amp; Drinks</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"/>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    rel="stylesheet"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"/>
+  <link rel="stylesheet" href="Style.css">
+  <link rel="stylesheet" href="food_drink.css" />
+</head>
+<body>
+  <nav class="navbar navbar-dark spoiler-nav sticky-top">
+<header class="bk-topbar">
+  <a href="index.html" class="bk-back" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </a>
+  <a href="index.html" class="bk-logo serif">The Spoiler House</a>
+  <div class="bk-topbar-spacer"></div>
+  <div class="lang-switch" id="langSwitch">
+    <button class="active" data-lang="en">EN</button>
+    <button data-lang="kh">KH</button>
+  </div>
+</header>
+      <!-- Cart icon in navbar -->
+      <div class="d-flex align-items-center gap-2">
+        <a href="orders.html" class="btn btn-outline-danger btn-sm cart-nav-btn">
+          <i class="bi bi-receipt me-1"></i>My Orders
+        </a>
+      </div>
+    </div>
+  </nav>
+  <header class="hero-banner">
+    <div class="hero-overlay">
+      <div class="container py-5">
+        <!-- Section eyebrow -->
+        <div class="booking-step mb-3">
+          <span class="step-pill">Concessions</span>
+          <span class="step-label ms-2">Pickup at the counter</span>
+        </div>
+        <h1 class="hero-title">Enhance Your Experience</h1>
+        <p class="hero-sub">Order your favorite snacks and drinks ahead — ready for pickup when you arrive.</p>
+      </div>
+    </div>
+  </header>
+  <div class="ticket-divider">
+    <div class="ticket-holes">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span>
+      <span aria-hidden="true"></span><span aria-hidden="true"></span>
+      <span aria-hidden="true"></span><span aria-hidden="true"></span>
+      <span aria-hidden="true"></span><span aria-hidden="true"></span>
+      <span aria-hidden="true"></span><span aria-hidden="true"></span>
+      <span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </div>
+  </div>
+  <main class="container py-5" id="main-content">
+    <div class="row g-5">
+      <!-- LEFT COLUMN -->
+      <div class="col-lg-8">
+        <section id="food" class="mb-5">
+          <div class="section-header mb-4">
+            <span class="section-eyebrow">🍿 SNACKS</span>
+            <h2 class="section-title">Cinema Bites</h2>
+            <p class="section-sub">The perfect companions for your film</p>
+          </div>
+          <div class="row g-4" id="food-grid">
+            <!-- Card 1: Classic Popcorn -->
+            <div class="col-sm-6" data-card data-id="f1" 
+                 data-name="Classic Butter Popcorn" 
+                 data-price="4.50" 
+                 data-category="food">
+              <div class="menu-card h-100">
+                <div class="menu-img-wrap">
+                  <img src="Popcorn1.png" alt="Popcorn1" class="menu-img" loading="lazy">
+                  <span class="menu-badge">BESTSELLER</span>
+                </div>
+                <div class="menu-card-body">
+                  <h5 class="menu-name">Classic Butter Popcorn</h5>
+                  <p class="menu-desc">Golden, fluffy popcorn drenched in real butter. Large bucket.</p>
+                  <div class="menu-footer">
+                    <span class="menu-price">$4.50</span>
+                    <div class="qty-control" data-id="f1">
+                      <button class="qty-btn minus-btn" aria-label="Decrease quantity">
+                        <i class="bi bi-dash"></i>
+                      </button>
+                      <span class="qty-display">0</span>
+                      <button class="qty-btn plus-btn" aria-label="Increase quantity">
+                        <i class="bi bi-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <button class="add-btn w-100 mt-3" data-id="f1">
+                    <i class="bi bi-bag-plus me-2"></i>Add to Order
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Card 2: Spicy Nachos -->
+            <div class="col-sm-6" data-card data-id="f2"
+                 data-name="Loaded Spicy Nachos"
+                 data-price="6.00"
+                 data-category="food">
+              <div class="menu-card h-100">
+                <div class="menu-img-wrap">
+                  <img src="Loaded Spicy Nachos.png" alt="Loaded Spicy Nachos" class="menu-img" loading="lazy">
+                  <span class="menu-badge spicy-badge">🌶 SPICY</span>
+                </div>
+                <div class="menu-card-body">
+                  <h5 class="menu-name">Loaded Spicy Nachos</h5>
+                  <p class="menu-desc">Crispy tortilla chips with jalapeño cheese sauce &amp; salsa.</p>
+                  <div class="menu-footer">
+                    <span class="menu-price">$6.00</span>
+                    <div class="qty-control" data-id="f2">
+                      <button class="qty-btn minus-btn" aria-label="Decrease quantity"><i class="bi bi-dash"></i></button>
+                      <span class="qty-display">0</span>
+                      <button class="qty-btn plus-btn" aria-label="Increase quantity"><i class="bi bi-plus"></i></button>
+                    </div>
+                  </div>
+                  <button class="add-btn w-100 mt-3" data-id="f2">
+                    <i class="bi bi-bag-plus me-2"></i>Add to Order
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Card 3: Hot Dog Combo -->
+            <div class="col-sm-6" data-card data-id="f3"
+                 data-name="Cinema Hot Dog Combo"
+                 data-price="7.50"
+                 data-category="food">
+              <div class="menu-card h-100">
+                <div class="menu-img-wrap">
+                  <img src="HotDog Cambo.png" alt="HotDog Cambo" class="menu-img" loading="lazy">
+                  <span class="menu-badge combo-badge">COMBO</span>
+                </div>
+                <div class="menu-card-body">
+                  <h5 class="menu-name">Cinema Hot Dog Combo</h5>
+                  <p class="menu-desc">Jumbo beef frankfurter in a brioche bun + small popcorn.</p>
+                  <div class="menu-footer">
+                    <span class="menu-price">$7.50</span>
+                    <div class="qty-control" data-id="f3">
+                      <button class="qty-btn minus-btn" aria-label="Decrease quantity"><i class="bi bi-dash"></i></button>
+                      <span class="qty-display">0</span>
+                      <button class="qty-btn plus-btn" aria-label="Increase quantity"><i class="bi bi-plus"></i></button>
+                    </div>
+                  </div>
+                  <button class="add-btn w-100 mt-3" data-id="f3">
+                    <i class="bi bi-bag-plus me-2"></i>Add to Order
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Card 4: Pretzel Bites -->
+            <div class="col-sm-6" data-card data-id="f4"
+                 data-name="Soft Pretzel Bites"
+                 data-price="5.00"
+                 data-category="food">
+              <div class="menu-card h-100">
+                <div class="menu-img-wrap">
+                  <img src="Chicken.png" alt="Chicken" class="menu-img" loading="lazy">
+                </div>
+                <div class="menu-card-body">
+                  <h5 class="menu-name">Soft Pretzel Bites</h5>
+                  <p class="menu-desc">Warm, salted pretzel bites served with a cheese dipping sauce.</p>
+                  <div class="menu-footer">
+                    <span class="menu-price">$5.00</span>
+                    <div class="qty-control" data-id="f4">
+                      <button class="qty-btn minus-btn" aria-label="Decrease quantity"><i class="bi bi-dash"></i></button>
+                      <span class="qty-display">0</span>
+                      <button class="qty-btn plus-btn" aria-label="Increase quantity"><i class="bi bi-plus"></i></button>
+                    </div>
+                  </div>
+                  <button class="add-btn w-100 mt-3" data-id="f4">
+                    <i class="bi bi-bag-plus me-2"></i>Add to Order
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Ticket Divider between Food and Drinks sections -->
+        <div class="ticket-divider mini-divider mb-5">
+          <div class="ticket-holes">
+            <span aria-hidden="true"></span><span aria-hidden="true"></span>
+            <span aria-hidden="true"></span><span aria-hidden="true"></span>
+            <span aria-hidden="true"></span><span aria-hidden="true"></span>
+            <span aria-hidden="true"></span><span aria-hidden="true"></span>
+          </div>
+        </div>
+        <section id="drinks" class="mb-5">
+          <div class="section-header mb-4">
+            <span class="section-eyebrow">🥤 DRINKS</span>
+            <h2 class="section-title">Refreshments</h2>
+            <p class="section-sub">Stay refreshed from opening scene to credits</p>
+          </div>
+          <div class="row g-4" id="drink-grid">
+            <!-- Card 5: Mega Soda -->
+            <div class="col-sm-6" data-card data-id="d1"
+                 data-name="Mega Fountain Soda"
+                 data-price="3.50"
+                 data-category="drink">
+              <div class="menu-card h-100">
+                <div class="menu-img-wrap">
+                  <img src="Coca1.png" alt="cola" class="menu-img" loading="lazy">
+                  <span class="menu-badge">REFILLABLE</span>
+                </div>
+                <div class="menu-card-body">
+                  <h5 class="menu-name">Mega Fountain Soda</h5>
+                  <p class="menu-desc">44 oz cup, your choice of cola, lemon-lime, or orange. Free refills.</p>
+                  <div class="menu-footer">
+                    <span class="menu-price">$3.50</span>
+                    <div class="qty-control" data-id="d1">
+                      <button class="qty-btn minus-btn" aria-label="Decrease quantity"><i class="bi bi-dash"></i></button>
+                      <span class="qty-display">0</span>
+                      <button class="qty-btn plus-btn" aria-label="Increase quantity"><i class="bi bi-plus"></i></button>
+                    </div>
+                  </div>
+                  <button class="add-btn w-100 mt-3" data-id="d1">
+                    <i class="bi bi-bag-plus me-2"></i>Add to Order
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Card 6: Craft Lemonade -->
+            <div class="col-sm-6" data-card data-id="d2"
+                 data-name="Craft Lemonade"
+                 data-price="4.00"
+                 data-category="drink">
+              <div class="menu-card h-100">
+                <div class="menu-img-wrap">
+                  <img src="Craft lemonade.png" alt="Craft Lemonade" class="menu-img" loading="lazy">
+                  <span class="menu-badge new-badge">NEW</span>
+                </div>
+                <div class="menu-card-body">
+                  <h5 class="menu-name">Craft Lemonade</h5>
+                  <p class="menu-desc">House-squeezed lemonade with mint &amp; a hint of strawberry syrup.</p>
+                  <div class="menu-footer">
+                    <span class="menu-price">$4.00</span>
+                    <div class="qty-control" data-id="d2">
+                      <button class="qty-btn minus-btn" aria-label="Decrease quantity"><i class="bi bi-dash"></i></button>
+                      <span class="qty-display">0</span>
+                      <button class="qty-btn plus-btn" aria-label="Increase quantity"><i class="bi bi-plus"></i></button>
+                    </div>
+                  </div>
+                  <button class="add-btn w-100 mt-3" data-id="d2">
+                    <i class="bi bi-bag-plus me-2"></i>Add to Order
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Card 7: Iced Coffee -->
+            <div class="col-sm-6" data-card data-id="d3"
+                 data-name="Iced Caramel Coffee"
+                 data-price="5.00"
+                 data-category="drink">
+              <div class="menu-card h-100">
+                <div class="menu-img-wrap">
+                  <img src="IcedCoffee.png" alt="Iced Caramel Coffee" class="menu-img" loading="lazy">
+                </div>
+                <div class="menu-card-body">
+                  <h5 class="menu-name">Iced Caramel Coffee</h5>
+                  <p class="menu-desc">Cold brew coffee, caramel drizzle, and oat milk over ice.</p>
+                  <div class="menu-footer">
+                    <span class="menu-price">$5.00</span>
+                    <div class="qty-control" data-id="d3">
+                      <button class="qty-btn minus-btn" aria-label="Decrease quantity"><i class="bi bi-dash"></i></button>
+                      <span class="qty-display">0</span>
+                      <button class="qty-btn plus-btn" aria-label="Increase quantity"><i class="bi bi-plus"></i></button>
+                    </div>
+                  </div>
+                  <button class="add-btn w-100 mt-3" data-id="d3">
+                    <i class="bi bi-bag-plus me-2"></i>Add to Order
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Card 8: Premium Milkshake -->
+            <div class="col-sm-6" data-card data-id="d4"
+                 data-name="Premium Milkshake"
+                 data-price="6.50"
+                 data-category="drink">
+              <div class="menu-card h-100">
+                <div class="menu-img-wrap">
+                  <img src="Milkshake.png" alt="Mega Fountain Soda" class="menu-img" loading="lazy">
+                  <span class="menu-badge combo-badge">PREMIUM</span>
+                </div>
+                <div class="menu-card-body">
+                  <h5 class="menu-name">Premium Milkshake</h5>
+                  <p class="menu-desc">Thick hand-spun shake: chocolate, vanilla, or strawberry. 16oz.</p>
+                  <div class="menu-footer">
+                    <span class="menu-price">$6.50</span>
+                    <div class="qty-control" data-id="d4">
+                      <button class="qty-btn minus-btn" aria-label="Decrease quantity"><i class="bi bi-dash"></i></button>
+                      <span class="qty-display">0</span>
+                      <button class="qty-btn plus-btn" aria-label="Increase quantity"><i class="bi bi-plus"></i></button>
+                    </div>
+                  </div>
+                  <button class="add-btn w-100 mt-3" data-id="d4">
+                    <i class="bi bi-bag-plus me-2"></i>Add to Order
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="col-lg-4">
+        <div class="cart-sidebar" id="cart-sidebar">
+          <div class="cart-header">
+            <h4 class="cart-title">
+              <i class="bi bi-bag-fill me-2 text-danger"></i>Your Order
+            </h4>
+            <p class="cart-movie-ref">
+              <i class="bi bi-bag-check me-1"></i>
+              <span id="cart-movie-ref">Concessions — pickup at the counter</span>
+            </p>
+          </div>
+          <ul class="cart-list" id="cart-list">
+            <li class="cart-empty" id="cart-empty">
+              <i class="bi bi-bag fs-2 d-block mb-2 text-danger opacity-50"></i>
+              No items yet — add some snacks!
+            </li>
+          </ul>
+          <!-- Cart totals breakdown -->
+          <div class="cart-totals" id="cart-totals">
+            <div class="totals-row">
+              <span>Food &amp; Drinks</span>
+              <span id="food-subtotal">$0.00</span>
+            </div>
+            <div class="totals-row totals-tax">
+              <span>Tax (10%)</span>
+              <span id="tax-amount">$0.00</span>
+            </div>
+            <div class="totals-row totals-grand">
+              <span>Total</span>
+              <span id="grand-total">$0.00</span>
+            </div>
+          </div>
+          <button class="btn btn-outline-secondary w-100 mb-2 skip-btn" id="skip-btn">
+            Clear Order
+          </button>
+          <button
+            class="checkout-btn w-100"
+            id="checkout-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#confirm-modal">
+            <i class="bi bi-credit-card-fill me-2"></i>
+            Place Order
+          </button>
+          <div class="trust-row mt-3">
+            <span><i class="bi bi-shield-lock-fill text-danger me-1"></i>Secure</span>
+            <span><i class="bi bi-arrow-counterclockwise text-danger me-1"></i>Free cancel</span>
+            <span><i class="bi bi-check-circle-fill text-danger me-1"></i>Instant confirm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div class="cart-bar d-lg-none" id="cart-bar">
+    <div class="d-flex justify-content-between align-items-center px-4 py-3">
+      <div>
+        <span class="cart-bar-label">Your Order</span>
+        <span class="badge bg-danger rounded-pill ms-2" id="cart-bar-count">0 items</span>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <span class="cart-bar-total" id="cart-bar-total">$0.00</span>
+        <button
+          class="checkout-btn-sm"
+          data-bs-toggle="modal"
+          data-bs-target="#confirm-modal">
+          Checkout <i class="bi bi-arrow-right ms-1"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="confirm-modal" tabindex="-1" aria-labelledby="confirm-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content spoiler-modal">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="confirm-modal-label">
+            <i class="bi bi-bag-check-fill text-danger me-2"></i>
+            Review Your Order
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="modal-movie-info">
+            <i class="bi bi-bag-check-fill text-danger me-1"></i>
+            Pickup order at the concessions counter
+          </p>
+          <ul class="modal-order-list" id="modal-order-list">
+            <li class="modal-order-item text-muted">No food items added.</li>
+          </ul>
+          <div class="modal-total-row">
+            <span>Grand Total:</span>
+            <span class="modal-total-amount" id="modal-grand-total">$0.00</span>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            <i class="bi bi-pencil me-1"></i> Edit Order
+          </button>
+          <button type="button" class="checkout-btn" id="final-confirm-btn">
+            <i class="bi bi-check-lg me-1"></i> Confirm &amp; Pay
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="spoiler-footer" aria-label="Site footer">
+    <div class="container text-center py-4">
+      <p class="footer-brand mb-1">The Spoiler House</p>
+      <p class="footer-copy">© 2025 The Spoiler House.</p>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const TAX_RATE = 0.10;
+const cart = {};
+const cartList       = document.getElementById('cart-list');
+const cartEmpty      = document.getElementById('cart-empty');
+const cartCount      = document.getElementById('cart-count');   
+const foodSubtotal   = document.getElementById('food-subtotal');
+const taxAmount      = document.getElementById('tax-amount');
+const grandTotal     = document.getElementById('grand-total');
+const cartBarCount   = document.getElementById('cart-bar-count');
+const cartBarTotal   = document.getElementById('cart-bar-total');
+const modalOrderList = document.getElementById('modal-order-list');
+const modalGrandTotal= document.getElementById('modal-grand-total');
+function formatPrice(amount) {
+  return '$' + amount.toFixed(2);
+}
+
+function getCartTotals() {
+  let totalItems = 0;
+  let foodTotal  = 0;
+  Object.values(cart).forEach(item => {
+    totalItems += item.qty;
+    foodTotal  += item.price * item.qty;
+  });
+
+  const tax        = foodTotal * TAX_RATE;
+  const grand      = foodTotal + tax;
+
+  return { totalItems, foodTotal, tax, grand };
+}
+
+function addToCart(id, name, price) {
+  if (cart[id]) {
+    cart[id].qty += 1;
+  } else {
+    cart[id] = { name, price: parseFloat(price), qty: 1 };
+  }
+  syncQtyDisplay(id);  
+  renderCart();        
+}
+
+function removeFromCart(id) {
+  delete cart[id];
+  syncQtyDisplay(id);
+  renderCart();
+}
+
+function decrementItem(id) {
+  if (!cart[id]) return; 
+  cart[id].qty -= 1;
+  if (cart[id].qty <= 0) {
+    delete cart[id]; 
+  }
+  syncQtyDisplay(id);
+  renderCart();
+}
+
+function syncQtyDisplay(id) {
+  const qtyControl = document.querySelector(`.qty-control[data-id="${id}"]`);
+  if (!qtyControl) return;
+  const display = qtyControl.querySelector('.qty-display');
+  if (!display) return;
+  display.textContent = cart[id] ? cart[id].qty : 0;
+}
+
+function renderCart() {
+  renderCartList();
+  renderTotals();
+  renderMobileBar();
+}
+
+function renderCartList() {
+  const cartKeys = Object.keys(cart);
+  if (cartKeys.length === 0) {
+    cartEmpty.style.display = 'block';
+    cartList.querySelectorAll('.cart-item').forEach(el => el.remove());
+    return; 
+  }
+  cartEmpty.style.display = 'none';
+  cartList.querySelectorAll('.cart-item').forEach(el => el.remove());
+  cartKeys.forEach(id => {
+    const item     = cart[id];
+    const itemTotal = item.price * item.qty;
+    const li = document.createElement('li');
+    li.className = 'cart-item';
+    li.setAttribute('data-id', id); 
+    li.innerHTML = `
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-meta">${item.qty} × ${formatPrice(item.price)}</div>
+      </div>
+      <span class="cart-item-price">${formatPrice(itemTotal)}</span>
+      <button class="cart-item-remove" data-id="${id}" aria-label="Remove ${item.name} from order">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    `;
+    cartList.appendChild(li);
+    li.querySelector('.cart-item-remove').addEventListener('click', (e) => {
+      const removeId = e.currentTarget.getAttribute('data-id');
+      removeFromCart(removeId);
+    });
+  });
+}
+
+function renderTotals() {
+  const { totalItems, foodTotal, tax, grand } = getCartTotals();
+  foodSubtotal.textContent = formatPrice(foodTotal);
+  taxAmount.textContent    = formatPrice(tax);
+  grandTotal.textContent   = formatPrice(grand);
+  cartCount.textContent = totalItems;
+  if (modalGrandTotal) {
+    modalGrandTotal.textContent = formatPrice(grand);
+  }
+}
+
+function renderMobileBar() {
+  const { totalItems, grand } = getCartTotals();
+  if (cartBarCount) {
+    cartBarCount.textContent = totalItems === 1
+      ? '1 item'
+      : `${totalItems} items`;
+  }
+  if (cartBarTotal) {
+    cartBarTotal.textContent = formatPrice(grand);
+  }
+}
+
+function populateModal() {
+  modalOrderList.innerHTML = '';
+  const cartKeys = Object.keys(cart);
+  if (cartKeys.length === 0) {
+    const li = document.createElement('li');
+    li.className = 'modal-order-item text-muted';
+    li.innerHTML = '<span>No food items added.</span><span>$0.00</span>';
+    modalOrderList.appendChild(li);
+  } else {
+    cartKeys.forEach(id => {
+      const item = cart[id];
+      const li   = document.createElement('li');
+      li.className = 'modal-order-item';
+      li.innerHTML = `
+        <span>${item.qty}× ${item.name}</span>
+        <span>${formatPrice(item.price * item.qty)}</span>
+      `;
+      modalOrderList.appendChild(li);
+    });
+  }
+  const { grand } = getCartTotals();
+  if (modalGrandTotal) {
+    modalGrandTotal.textContent = formatPrice(grand);
+  }
+}
+const confirmModal = document.getElementById('confirm-modal');
+if (confirmModal) {
+  confirmModal.addEventListener('show.bs.modal', populateModal);
+}
+
+const finalConfirmBtn = document.getElementById('final-confirm-btn');
+if (finalConfirmBtn) {
+  finalConfirmBtn.addEventListener('click', () => {
+    if (Object.keys(cart).length === 0) return;
+    const modalInstance = bootstrap.Modal.getInstance(confirmModal);
+    if (modalInstance) modalInstance.hide();
+    const { grand } = getCartTotals();
+
+    const order = {
+      code: 'FD-' + Math.random().toString(36).slice(2,8).toUpperCase(),
+      items: Object.values(cart).map(item => ({ name: item.name, price: item.price, qty: item.qty })),
+      total: grand,
+      orderedAt: new Date().toISOString()
+    };
+    try {
+      const saved = JSON.parse(localStorage.getItem('sh_fnb_orders') || '[]');
+      saved.push(order);
+      localStorage.setItem('sh_fnb_orders', JSON.stringify(saved));
+    } catch (e) {}
+
+    setTimeout(() => {
+      alert(`🍿 Order placed! Total ${formatPrice(grand)} — pick it up at the concessions counter.`);
+      Object.keys(cart).forEach(id => delete cart[id]);
+      document.querySelectorAll('.qty-display').forEach(el => el.textContent = '0');
+      renderCart();
+      window.location.href = 'orders.html';
+    }, 400);
+  });
+}
+const skipBtn = document.getElementById('skip-btn');
+if (skipBtn) {
+  skipBtn.addEventListener('click', () => {
+    if (Object.keys(cart).length === 0) return;
+    if (confirm('Clear your current order?')) {
+      Object.keys(cart).forEach(id => delete cart[id]);
+      document.querySelectorAll('.qty-display').forEach(el => el.textContent = '0');
+      renderCart();
+    }
+  });
+}
+
+function scrollToCart() {
+  const target = window.innerWidth >= 992
+    ? document.getElementById('cart-sidebar')
+    : document.getElementById('food');
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const mainContent = document.getElementById('main-content');
+  if (!mainContent) return;
+  mainContent.addEventListener('click', (e) => {
+    const addBtn = e.target.closest('.add-btn');
+    if (addBtn) {
+      const id = addBtn.getAttribute('data-id');
+      const card = addBtn.closest('[data-card]');
+      if (!card) return;
+      const name  = card.getAttribute('data-name');
+      const price = card.getAttribute('data-price');
+      addToCart(id, name, price);
+      const originalHTML = addBtn.innerHTML;
+      addBtn.innerHTML = '<i class="bi bi-check-lg me-2"></i>Added!';
+      addBtn.classList.add('added');
+      setTimeout(() => {
+        addBtn.innerHTML = originalHTML;
+        addBtn.classList.remove('added');
+      }, 1200);
+      return; 
+    }
+    const plusBtn = e.target.closest('.plus-btn');
+    if (plusBtn) {
+      const qtyControl = plusBtn.closest('.qty-control');
+      if (!qtyControl) return;
+      const id = qtyControl.getAttribute('data-id');
+      const card = document.querySelector(`[data-card][data-id="${id}"]`);
+      if (!card) return;
+      const name  = card.getAttribute('data-name');
+      const price = card.getAttribute('data-price');
+      addToCart(id, name, price);
+      return;
+    }
+    const minusBtn = e.target.closest('.minus-btn');
+    if (minusBtn) {
+      const qtyControl = minusBtn.closest('.qty-control');
+      if (!qtyControl) return;
+      const id = qtyControl.getAttribute('data-id');
+      decrementItem(id);
+      return;
+    }
+  });
+  renderTotals();
+  window.scrollToCart = scrollToCart;
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders — The Spoiler House</title>
+  <link rel="stylesheet" href="Style.css">
+  <link rel="stylesheet" href="booking.css">
+  <link rel="stylesheet" href="ticket.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Order cards have no poster row, so skip the ticket-stub notches sized for that layout */
+    .tix-order-card .bk-ticket::before,
+    .tix-order-card .bk-ticket::after{ display:none; }
+    .tix-order-card .bk-ticket-fnb-label{ margin-bottom:8px; }
+    .tix-order-card .bk-ticket-meta{ font-size:13px; }
+  </style>
+</head>
+<body class="booking-body">
+
+<header class="bk-topbar">
+  <a href="index.html" class="bk-back" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </a>
+  <a href="index.html" class="bk-logo serif">The Spoiler House</a>
+  <div class="bk-topbar-spacer"></div>
+  <div class="lang-switch" id="langSwitch">
+    <button class="active" data-lang="en">EN</button>
+    <button data-lang="kh">KH</button>
+  </div>
+</header>
+
+<main id="ordersMain"></main>
+
+<script>
+(function(){
+  const main = document.getElementById('ordersMain');
+
+  let orders = [];
+  try{ orders = JSON.parse(localStorage.getItem('sh_fnb_orders') || '[]'); }
+  catch(e){ orders = []; }
+
+  if(!orders.length){
+    main.innerHTML = `
+      <div class="tix-empty-wrap">
+        <div class="tix-empty-icon">🧾</div>
+        <div class="tix-empty-title serif">No orders yet</div>
+        <p class="tix-empty-sub">
+          Snacks and drinks you order from the Concessions menu will show up here.
+        </p>
+        <div class="tix-empty-actions">
+          <a href="food_drink.html" class="btn btn-primary">Order Food &amp; Drinks</a>
+          <a href="Rerng.html" class="btn btn-ghost">Back to Home</a>
+        </div>
+      </div>`;
+    return;
+  }
+
+  function formatOrderedAt(iso){
+    try{
+      const d = new Date(iso);
+      return 'Ordered ' + d.toLocaleDateString('en', {month:'short', day:'numeric', year:'numeric'}) +
+             ' at ' + d.toLocaleTimeString('en', {hour:'numeric', minute:'2-digit'});
+    }catch(e){ return ''; }
+  }
+
+  function formatPrice(n){ return '$' + n.toFixed(2); }
+
+  main.innerHTML = `
+    <div class="tix-page">
+      <div class="tix-page-head">
+        <div class="tix-page-title serif">My Orders</div>
+        <div class="tix-page-sub">${orders.length} order${orders.length>1?'s':''} placed on this device</div>
+      </div>
+      <div class="tix-list" id="ordersList"></div>
+    </div>`;
+
+  const list = document.getElementById('ordersList');
+  orders.slice().reverse().forEach((o) => {
+    const card = document.createElement('div');
+    card.className = 'tix-card tix-order-card';
+    card.innerHTML = `
+      <div class="tix-booked-at">${formatOrderedAt(o.orderedAt)}</div>
+      <div class="bk-ticket">
+        <div class="bk-ticket-fnb">
+          <div class="bk-ticket-fnb-label">Food &amp; Drinks</div>
+          ${o.items.map(it => `<div class="bk-ticket-fnb-row"><span>${it.qty}× ${it.name}</span><span>${formatPrice(it.price*it.qty)}</span></div>`).join('')}
+        </div>
+        <div class="bk-ticket-divider"></div>
+        <div class="bk-ticket-bottom">
+          <div class="bk-ticket-code">${o.code}</div>
+          <div class="bk-ticket-meta">Total: <strong>${formatPrice(o.total)}</strong></div>
+        </div>
+      </div>`;
+    list.appendChild(card);
+  });
+})();
+</script>
+</body>
+</html>

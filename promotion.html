@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promotions — The Spoiler House</title>
+  <link rel="stylesheet" href="Style.css">
+  <link rel="stylesheet" href="booking.css">
+  <link rel="stylesheet" href="promotion.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="booking-body">
+
+<header class="bk-topbar">
+  <a href="index.html" class="bk-back" aria-label="Back to home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </a>
+  <a href="index.html" class="bk-logo serif">The Spoiler House</a>
+  <div class="bk-topbar-spacer"></div>
+  <div class="lang-switch" id="langSwitch">
+    <button class="active" data-lang="en">EN</button>
+    <button data-lang="kh">KH</button>
+  </div>
+</header>
+<main id="promoMain"></main>
+<script>
+(function(){
+  /* ==========================================================
+     OFFER DATA — single source of truth for board + detail view
+     ========================================================== */
+  const OFFERS = [
+    { id:1,  type:'feature', badge:'Family Campaign', title:"Toy Story is Back on the Big Screen",
+      desc:"Bring the whole family for a limited theatrical re-release. Includes a collectible cup with every kids' combo.",
+      body:"For a limited run, Toy Story returns to the big screen in a special anniversary presentation. Every kids' combo purchased during the campaign comes with a free collectible cup while supplies last. A great pick for a family movie night.", img:'toystory.jpg', movieTitle:'Toy Story: Reunion' },
+    { id:2,  type:'feature', badge:'Lucky Draw', title:"Minions Lucky Draw — Win a Trip to Phnom Penh's Top Resort",
+      desc:"Every ticket to a Minions screening is an entry. Three lucky winners drawn at the end of the month.",
+      body:"Book any Minions screening and you're automatically entered into our monthly lucky draw. Three winners will be selected at the end of the month to win a getaway package at one of Phnom Penh's top resorts. No purchase beyond your ticket required — the more screenings you attend, the more entries you earn.", img:'minion.jpg', movieTitle:'Minions & Monsters' },
+    { id:3,  type:'feature', badge:'F&B Deal', title:"Popcorn Combo Offers, Every Day",
+      desc:"Mix-and-match popcorn flavors with any drink, starting from $2.50. Available at every Legend Cinema location.",
+      body:"Available every day at every location — mix and match your favorite popcorn flavors with any drink on the menu, starting from just $2.50. Ask our concession staff for the current flavor lineup when you arrive.", img:'banner.jpg', fnb:true },
+    { id:4,  type:'feature', badge:'Membership', title:"The Spoiler House Club Benefits, Unlocked",
+      desc:"Earn points on every ticket and combo, redeemable for free movies, upgrades, and member-only screenings.",
+      body:"Join The Spoiler House Club for free and start earning points on every ticket and food combo you purchase. Points can be redeemed for free tickets, seat upgrades, and access to member-only early screenings — plus a free ticket on your birthday, every year.", img:'popcorn.jpg' },
+    { id:5,  type:'deal', badge:'F&B', title:'Drink With Cola!',
+      desc:'Grab any medium or large combo and add an ice-cold Cola for just $1 more.',
+      body:'For a limited time, add an ice-cold Cola to any medium or large combo for just $1 more. Available at the concession counter — just mention the offer when you order.',img:'banner1.png', fnb:true },
+    { id:6,  type:'deal', badge:'F&B', title:'Buy 2 Get 1!',
+      desc:'Buy two regular popcorns and get two more completely free — perfect for group outings.',
+      body:'Bring your friends — buy two regular popcorns and get two more absolutely free. Valid on regular-size popcorn only, while stocks last, at all Spoiler House locations.', img:'popcorn2.jpg', fnb:true },
+    { id:7,  type:'deal', badge:'Now Showing', title:'Obsession Now Screening!',
+      desc:'The psychological thriller everyone is talking about is now playing in select cinemas.',
+      body:'Obsession is now showing in select cinemas. This gripping psychological thriller has audiences on the edge of their seats — book early, as showtimes are filling up fast.', img:'obsession.png', movieTitle:'Obssession'},
+    { id:8,  type:'deal', badge:'Now Showing', title:'Supergirl is Now Screening!',
+      desc:'The high-flying superhero adventure has landed. Catch it now in IMAX and standard formats.',
+      body:'Supergirl has officially landed in cinemas. Catch the high-flying superhero adventure in your choice of standard or IMAX formats, now showing at all Spoiler House locations.', img:'super_girl.png', movieTitle:'Supergirl'},
+    { id:9,  type:'deal', badge:'Advance Booking', title:'Spider-Man Advance Booking is Live!',
+      desc:'Secure your seats early for the most anticipated release of the year.',
+      body:'Advance booking for the year\'s most anticipated Spider-Man release is now open. Reserve your preferred seats and showtime before they sell out — early birds also get priority seat selection.', img:'spiderman.png'},
+    { id:10, type:'deal', badge:'Premium', title:'Diamond Class Package',
+      desc:'Reclining leather seats, a dedicated server, and a private lounge for the ultimate movie night.',
+      body:'Step up to Diamond Class for the ultimate movie night: fully reclining leather seats, a dedicated in-theater server, and access to a private lounge before showtime. Available at select locations — book early, capacity is limited.',img:'diamondpromotion.png' },
+    { id:11, type:'deal', badge:'Now Showing', title:'Colony!',
+      desc:'A sweeping sci-fi epic now playing on the big screen.',
+      body:'Colony, this season\'s sweeping sci-fi epic, is now playing on the big screen. Best experienced in IMAX for the full scale of its world.',img:'colony1.png', movieTitle:'Colony'}
+  ];
+
+  /* ==========================================================
+     MOVIE LOOKUP — mirrors the relevant entries from movie.html's
+     catalog so a promo tied to a specific film can hand booking.html
+     the correct movie instead of whatever was last browsed.
+     ========================================================== */
+  const MOVIE_LOOKUP = {
+    'Toy Story: Reunion': {title:'Toy Story: Reunion', genre:'Animation, Family', dur:'1h 42m', age:'All', lang:'EN (Sub KH)', rating:9.0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000136'},
+    'Minions & Monsters': {title:'Minions & Monsters', genre:'Animation, Adventure, Science Fiction', dur:'1h 30m', age:'13+', lang:'EN', rating:0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000186', upcoming:'Jul 17'},
+    'Obssession': {title:'Obssession', genre:'Horror, Thriller, Romance', dur:'1h 49m', age:'r18', lang:'EN', rating:0, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000276', upcoming:'Jul 10'},
+    'Supergirl': {title:'Supergirl', genre:'Action, Adventure, Superhero', dur:'1h 48m', age:'NC15', lang:'EN (Sub KH)', rating:7.9, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000137'},
+    'Colony': {title:'Colony', genre:'Thriller, Action', dur:'2h 3m', age:'R18', lang:'KH', rating:8.3, poster:'https://legen-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000185'}
+  };
+
+  const main = document.getElementById('promoMain');
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get('id'), 10);
+  const offer = OFFERS.find(o => o.id === id);
+
+  if(offer){
+    renderDetail(offer);
+  } else {
+    renderBoard();
+  }
+
+  /* ==================== DETAIL VIEW ==================== */
+  function renderDetail(o){
+    // Work out where the primary action button should actually send people.
+    const movie = o.movieTitle ? MOVIE_LOOKUP[o.movieTitle] : null;
+    let actionHref = 'Rerng.html#movies';
+    let actionLabel = 'Browse Movies';
+    if(movie){
+      actionHref = 'booking.html';
+      actionLabel = movie.upcoming ? 'Book Advance Tickets' : 'Book Now';
+    } else if(o.fnb){
+      actionHref = 'food_drink.html';
+      actionLabel = 'Order Now';
+    }
+
+    main.innerHTML = `
+      <div class="promo-detail-wrap">
+        <a href="promotion.html" class="promo-detail-back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          All Promotions
+        </a>
+
+        <div class="promo-detail-media">
+          <img src="${o.img}" alt="${o.title}">
+        </div>
+
+        <span class="deal-badge promo-detail-badge">${o.badge}</span>
+        <h1 class="promo-detail-title serif">${o.title}</h1>
+        <p class="promo-detail-body">${o.body}</p>
+
+        <div class="promo-detail-actions">
+          <a href="${actionHref}" class="btn btn-primary" id="promoActionBtn">${actionLabel}</a>
+          <a href="promotion.html" class="btn btn-ghost">Back to All Promotions</a>
+        </div>
+      </div>`;
+
+    // If this offer is tied to a specific movie, stash the *correct* movie
+    // data before navigating so booking.html doesn't fall back to whatever
+    // was last browsed in localStorage.
+    if(movie){
+      document.getElementById('promoActionBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.setItem('bk_movie', JSON.stringify(movie));
+        window.location.href = actionHref;
+      });
+    }
+  }
+
+  /* ==================== BOARD VIEW ==================== */
+  function renderBoard(){
+    const features = OFFERS.filter(o => o.type === 'feature');
+    const deals = OFFERS.filter(o => o.type === 'deal');
+
+    main.innerHTML = `
+      <div class="promo-page">
+        <div class="promo-page-head">
+          <span class="section-eyebrow">Don't Miss Out</span>
+          <h1 class="section-title serif">Promotions</h1>
+        </div>
+
+        <div class="promo-slider">
+          <div class="promo-track" id="promoTrack">
+            ${features.map((o,i) => `
+              <div class="promo-slide${i===0 ? ' active' : ''}">
+                <div class="promo-text">
+                  <span class="promo-eyebrow">${o.badge}</span>
+                  <h3 class="promo-title serif">${o.title}</h3>
+                  <p class="promo-desc">${o.desc}</p>
+                  <a href="promotion.html?id=${o.id}" class="btn btn-primary">Learn More</a>
+                </div>
+                <div class="promo-img-wrap"><img src="${o.img}" alt=""></div>
+              </div>`).join('')}
+          </div>
+          <div class="promo-nav" id="promoNav"></div>
+        </div>
+
+        <div class="deals-subhead">
+          <div>
+            <span class="section-eyebrow">More Ways to Save</span>
+            <h2 class="section-title serif">Current Deals</h2>
+          </div>
+        </div>
+
+        <div class="deal-grid">
+          ${deals.map(o => `
+            <a href="promotion.html?id=${o.id}" class="deal-card">
+              <div class="deal-media">
+                <span class="deal-badge">${o.badge}</span>
+                <img src="${o.img}" alt="${o.title}" class="deal-img" loading="lazy">
+              </div>
+              <div class="deal-info">
+                <div class="deal-title">${o.title}</div>
+                <div class="deal-cta">View Deal
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </div>
+              </div>
+            </a>`).join('')}
+        </div>
+      </div>`;
+
+    /* slider behavior */
+    const slides = document.querySelectorAll('.promo-slide');
+    const nav = document.getElementById('promoNav');
+    let idx = 0, timer;
+    slides.forEach((_, i) => {
+      const b = document.createElement('button');
+      if(i === 0) b.classList.add('active');
+      b.addEventListener('click', () => go(i));
+      nav.appendChild(b);
+    });
+    const dots = nav.querySelectorAll('button');
+    function go(i){
+      slides[idx].classList.remove('active');
+      dots[idx].classList.remove('active');
+      idx = (i + slides.length) % slides.length;
+      slides[idx].classList.add('active');
+      dots[idx].classList.add('active');
+      restart();
+    }
+    function restart(){ clearInterval(timer); timer = setInterval(() => go(idx + 1), 6000); }
+    if(slides.length > 1) restart();
+  }
+})();
+</script>
+</body>
+</html>
